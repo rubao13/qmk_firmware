@@ -5,8 +5,8 @@
     "bootloader": "rp2040",
     "diode_direction": "COL2ROW",
     "matrix_pins": {
-        "cols": ["GP7", "GP9"],
-        "rows": ["GP26", "GP28"]
+        "cols": ["GP9", "GP10"],
+        "rows": ["GP26", "GP27"]
     },
     "processor": "RP2040",
     "usb": {
