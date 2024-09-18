@@ -110,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_QWERTY] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_QWERTY] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
     [_LOWER]  = { ENCODER_CCW_CW(KC_DOWN, KC_UP)  },
-    [_RAISE]  = { ENCODER_CCW_CW(KC_BRIGHTNESS_DOWN, KC_BRIGHTNESS_UP)  },
+    [_RAISE]  = { ENCODER_CCW_CW(KC_BRIGHTNESS_UP, KC_BRIGHTNESS_DOWN)  },
     [_ADJUST] = { ENCODER_CCW_CW(KC_NO, KC_NO) },
 };
 #endif
@@ -120,6 +120,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 bool oled_task_user(void) {
     render_charizard();
-    # render_wpm();
+    // render_wpm();
     return false;
 }
