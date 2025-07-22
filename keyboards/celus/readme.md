@@ -1,27 +1,34 @@
-# celus
+# Celus
 
-![celus](imgur.com image replace me!)
+# How to flash the keyboard
+Generally you can follow the [official guide](https://docs.qmk.fm/newbs_getting_started). This is a bit more opinionated.
+The official guide recommends to install qmk globally on the system. But I prefer to keep binaries and config in a separate directory.
 
-*A short description of the keyboard/project*
+## Steps
+```
+# Use dedicated directory
+mkdir keyboard && cd keyboard
 
-* Keyboard Maintainer: [Jonas Natzer](https://github.com/Jonas Natzer)
-* Hardware Supported: *The PCBs, controllers supported*
-* Hardware Availability: *Links to where you can find this hardware*
+# Setup Python venv and install dependencies
+python3 -m venv venv && source venv/bin/activate
+pip3 install qmk
 
-Make example for this keyboard (after setting up your build environment):
+# Retrieve keyboard source code
+git clone https://gitlab.com/natjo/qmk_firmware.git
 
-    make celus:default
+# Initialize qmk (keep the qmk firmware)
+qmk setup
 
-Flashing example for this keyboard:
+# (Optional) Update keymap and keyboard behaviour
+vim qmk_firmware/keyboards/celus/keymaps/default/keymap.c
 
-    make celus:default:flash
+# Compile keyboard firmware
+cd qmk_firmware/
+qmk compile -j0 -kb celus -km default
 
-See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
-
-## Bootloader
-
-Enter the bootloader in 3 ways:
-
-* **Bootmagic reset**: Hold down the key at (0,0) in the matrix (usually the top left key or Escape) and plug in the keyboard
-* **Physical reset button**: Briefly press the button on the back of the PCB - some may have pads you must short instead
-* **Keycode in layout**: Press the key mapped to `QK_BOOT` if it is available
+# Flash keyboard
+# On first flash, hold "boot" on the microcontroller while connecting the cable
+# Once the initial flash was done, simply press "reset" twice while plugin to reflash
+sudo mount "/dev/microcontroller" /mnt
+sudo cp celus_default.uf2 /mnt
+```
