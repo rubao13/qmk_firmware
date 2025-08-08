@@ -1,7 +1,7 @@
 {
     "keyboard_name": "celus",
     "manufacturer": "Surej",
-    "maintainer": "Jonas",
+    "maintainer": "Jonas and Rubens",
     "bootloader": "rp2040",
     "diode_direction": "ROW2COL",
     "matrix_pins": {

@@ -1,3 +1,3 @@
 #pragma once
 
-void render_charizard(void);
+void render_lion(void);
