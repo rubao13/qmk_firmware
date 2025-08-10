@@ -1,6 +1,6 @@
 // Copyright 2023 QMK
 // SPDX-License-Identifier: GPL-2.0-or-later
-// https://docs.qmk.fm/keycodes
+
 
 #include QMK_KEYBOARD_H
 #include "lib/logos.h"
@@ -13,9 +13,9 @@ enum layer_number {
     _ADJUST,
 };
 
+// Use this link to search keycodes https://docs.qmk.fm/keycodes
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    // TODO missing KC_LBRC and KC_RBRC
-    // TODO currently two keys adjust to layer 2, but none to (unused) layer 3
     /*
      * QWERTY
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
@@ -42,21 +42,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
      * │F1 │F2 │F3 │F4 │F5 │F6 │   │F7 │F8 │F9 │F10│F11│F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │ Y │   │DEA│   │   │   │   │DEA│   │UP │ [ │ ] │ \ │
+     * │ | │   │DEA│   │   │   │   │DEA│   │UP │ [ │ ] │ \ │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │SFT│ ( │ ) │ { │ } │PREV│ │NEXT│LT │DEA│RT │ - │ = │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │   │ ! │ @ │ # │ $ │ % │   │ ^ │ & │ DN│ ( │ ) │   │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │   │   │ | │   │  DEL  │   │       │   │   │   │   │
+     * │   │   │   │   │  DEL  │ Y │       │   │   │   │   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
         KC_F1, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,         KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, KC_F12,
-        KC_Y, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,         KC_NO,   KC_NO,   KC_UP,   KC_LBRC,  KC_RBRC, KC_BSLS,
+        KC_PIPE, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,         KC_NO,   KC_NO,   KC_UP,   KC_LBRC,  KC_RBRC, KC_BSLS,
         KC_NO, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_MPRV,       KC_MNXT, KC_LEFT, KC_ASTR, KC_RIGHT, KC_MINS, KC_EQL,
         KC_LSFT, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,       KC_CIRC, KC_AMPR, KC_DOWN, KC_LPRN,  KC_RPRN, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO  , KC_DEL, KC_NO,      KC_PIPE,   KC_NO,   KC_NO,    KC_NO,   KC_NO
+        KC_NO, KC_NO, KC_NO, KC_NO  , KC_DEL, KC_Y,      KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO
         ),
     /*
      * _RAISE
