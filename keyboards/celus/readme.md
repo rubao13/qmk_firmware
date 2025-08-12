@@ -14,7 +14,7 @@ python3 -m venv venv && source venv/bin/activate
 pip3 install qmk
 
 # Retrieve keyboard source code
-git clone https://gitlab.com/natjo/qmk_firmware.git
+git clone https://github.com/rubao13/qmk_firmware.git
 
 # Initialize qmk (keep the qmk firmware)
 qmk setup
