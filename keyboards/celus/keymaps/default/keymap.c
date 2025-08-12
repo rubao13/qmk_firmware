@@ -13,6 +13,19 @@ enum layer_number {
     _ADJUST,
 };
 
+// Custom keycodes for logo switching
+enum custom_keycodes {
+    LOGO_SWITCH = SAFE_RANGE,
+    LOGO_LION,
+    LOGO_FLAMENGO,
+    LOGO_BAYERN,
+    LOGO_RIO,
+    LOGO_CELUS
+};
+
+// Variable to track current logo
+static uint8_t current_logo = 0; // 0 = Flamengo, 1 = Lion, 2 = Bayern
+
 // Use this link to search keycodes https://docs.qmk.fm/keycodes
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -27,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │CTL│ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ - │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │L1 │   │Mac│OPT│  SPC  │ W │  `    │'  │ K │ALT│ L2│
+     * │L1 │DEA│Mac│OPT│  SPC  │ W │  `    │'  │ K │LSW│ L2│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_QWERTY] = LAYOUT(
@@ -35,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
         KC_LCTL,   KC_A,    KC_S,    KC_D,    KC_F, KC_G,           KC_H,   KC_J, KC_K,    KC_L,    KC_SCLN, KC_ENT,
         KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-        MO(1), KC_1, KC_LGUI, KC_LOPT,KC_SPC, KC_W , KC_GRV,       KC_QUOT,  KC_K,   KC_1, MO(2)
+        MO(1), KC_1, KC_LGUI, KC_LOPT,KC_SPC, KC_W , KC_GRV,       KC_QUOT,  KC_K,   LOGO_SWITCH, MO(2)
         ),
     /*
      * LOWER
@@ -48,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │   │ ! │ @ │ # │ $ │ % │   │ ^ │ & │ DN│ ( │ ) │   │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │   │   │   │   │  DEL  │ Y │       │   │   │   │   │
+     * │   │   │FLA│LIO│  DEL  │ Y │       │   │   │BAY│   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
@@ -56,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_PIPE, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,         KC_NO,   KC_NO,   KC_UP,   KC_LBRC,  KC_RBRC, KC_BSLS,
         KC_NO, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_MPRV,       KC_MNXT, KC_LEFT, KC_ASTR, KC_RIGHT, KC_MINS, KC_EQL,
         KC_LSFT, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,       KC_CIRC, KC_AMPR, KC_DOWN, KC_LPRN,  KC_RPRN, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO  , KC_DEL, KC_Y,      KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO
+        KC_NO, KC_NO, LOGO_FLAMENGO, LOGO_LION  , KC_DEL, KC_Y,      KC_NO,   KC_NO,   KC_NO,    LOGO_CELUS,   KC_NO
         ),
     /*
      * _RAISE
@@ -69,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │   │ 1 │ 2 │ 3 │   │   │   │   │   │   │   │   │   │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │   │   │ 0 │ . │  DEL  │ENT│       │   │   │   │   │
+     * │   │   │ 0 │ . │  DEL  │ENT│       │   │   │LSW│   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
@@ -78,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, KC_7,  KC_8,  KC_9,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_LCBR,   KC_RCBR,   KC_NO,
         KC_NO, KC_4,  KC_5,  KC_6,   KC_NO,  KC_VOLD,        KC_VOLU, KC_LPRN, KC_RPRN, KC_NO, KC_NO, KC_EQL,
         KC_NO, KC_1,  KC_2,  KC_3,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO, KC_NO, KC_0,  KC_DOT,         KC_DEL, KC_ENT, KC_NO,            KC_NO,   KC_NO,   KC_NO,   KC_NO
+        KC_NO, KC_NO, KC_0,  KC_DOT,         KC_DEL, KC_ENT, KC_NO,            KC_NO,   KC_NO,   LOGO_SWITCH,   KC_NO
         ),
     /*
      * This layer is not used currently
@@ -113,8 +126,63 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LOGO_SWITCH:
+            if (record->event.pressed) {
+                current_logo = (current_logo + 1) % 5; // Cycle through 0, 1, 2, 3, 4
+            }
+            break;
+        case LOGO_LION:
+            if (record->event.pressed) {
+                current_logo = 1;
+            }
+            break;
+        case LOGO_FLAMENGO:
+            if (record->event.pressed) {
+                current_logo = 0;
+            }
+            break;
+        case LOGO_BAYERN:
+            if (record->event.pressed) {
+                current_logo = 2;
+            }
+            break;
+        case LOGO_RIO:
+            if (record->event.pressed) {
+                current_logo = 3;
+            }
+            break;
+        case LOGO_CELUS:
+            if (record->event.pressed) {
+                current_logo = 4;
+            }
+            break;
+    }
+    return true;
+}
 
 bool oled_task_user(void) {
-    render_lion();
+    // Switch between logos based on current_logo variable
+    switch (current_logo) {
+        case 0:
+            render_flamengo();
+            break;
+        case 1:
+            render_lion();
+            break;
+        case 2:
+            render_bayern();
+            break;
+        case 3:
+            render_rio();
+            break;
+        case 4:
+            render_celus();
+            break;
+        default:
+            render_flamengo();
+            break;
+    }
     return false;
 }
