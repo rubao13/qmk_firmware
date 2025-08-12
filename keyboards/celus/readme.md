@@ -1,34 +1,179 @@
 # Celus
 
-# How to flash the keyboard
-Generally you can follow the [official guide](https://docs.qmk.fm/newbs_getting_started). This is a bit more opinionated.
-The official guide recommends to install qmk globally on the system. But I prefer to keep binaries and config in a separate directory.
+![Celus Keyboard](https://www.celus.io/hubfs/favicon.ico)
 
-## Steps
+*A custom split keyboard featuring a unique layout with 60 keys optimized for ergonomic typing.*
+
+## Keyboard Info
+
+- **Keyboard Maintainers**: Jonas and Rubens
+- **Hardware Supported**: Celus PCB with RP2040 microcontroller
+- **Hardware Availability**: Custom build
+
+## Features
+
+- **Split Design**: Ergonomic split layout with 60 keys
+- **RP2040 Powered**: Uses the powerful and affordable RP2040 microcontroller
+- **4-Layer Support**: Default keymap includes QWERTY, Lower, Raise, and Adjust layers
+- **Hot-swappable**: Compatible with MX-style switches
+- **OLED Support**: Displays typing stats and layer information
+- **Rotary Encoder**: Media control and layer switching
+
+## Layout
+
+The Celus features a 60-key split layout with the following arrangement:
+- **Top Row**: Numbers and function keys
+- **Home Row**: QWERTY layout with modifiers
+- **Bottom Row**: Space bars, layer switches, and navigation keys
+- **Thumb Cluster**: Optimized for comfortable access to space, layer toggles, and modifiers
+
 ```
-# Use dedicated directory
-mkdir keyboard && cd keyboard
+QWERTY Layer:
+┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
+│ESC│ 1 │ 2 │ 3 │ 4 │ 5 │   │ 6 │ 7 │ 8 │ 9 │ 0 │MUT│
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P │BSP│
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│SFT│ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ : │ENT│
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│CTL│ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ - │
+├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
+│L1 │   │CMD│OPT│  SPC  │ W │   `   │ ' │ K │ALT│ L2│
+└───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
+```
 
-# Setup Python venv and install dependencies
-python3 -m venv venv && source venv/bin/activate
-pip3 install qmk
+## Getting Started
 
-# Retrieve keyboard source code
-git clone https://gitlab.com/natjo/qmk_firmware.git
+### Prerequisites
 
-# Initialize qmk (keep the qmk firmware)
+- Python 3.7 or newer
+- Git
+- A compatible text editor (VS Code, Vim, etc.)
+
+### Quick Setup
+
+The easiest way to get started is following the [official QMK tutorial](https://docs.qmk.fm/newbs). However, if you prefer to keep QMK in an isolated environment, follow the steps below:
+
+### Isolated Setup (Recommended)
+
+```bash
+# Create and navigate to a dedicated directory
+mkdir ~/qmk-celus && cd ~/qmk-celus
+
+# Create Python virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install QMK
+pip install qmk
+
+# Clone the firmware repository
+git clone https://github.com/rubao13/qmk_firmware.git
+cd qmk_firmware
+
+# Setup QMK (follow prompts to configure)
 qmk setup
 
-# (Optional) Update keymap and keyboard behaviour
-vim qmk_firmware/keyboards/celus/keymaps/default/keymap.c
-
-# Compile keyboard firmware
-cd qmk_firmware/
-qmk compile -j0 -kb celus -km default
-
-# Flash keyboard
-# On first flash, hold "boot" on the microcontroller while connecting the cable
-# Once the initial flash was done, simply press "reset" twice while plugin to reflash
-sudo mount "/dev/microcontroller" /mnt
-sudo cp celus_default.uf2 /mnt
+# Test compilation
+qmk compile -kb celus -km default
 ```
+
+### Building and Flashing
+
+#### Compile Firmware
+
+```bash
+# Navigate to QMK directory
+cd qmk_firmware
+
+# Compile with default keymap
+qmk compile -kb celus -km default
+
+# Compile with multiple cores for faster build
+qmk compile -j0 -kb celus -km default
+```
+
+#### Flash the Keyboard
+
+**First Time Flashing:**
+1. Hold the "BOOT" button on the RP2040 while plugging in the USB cable
+2. The keyboard will appear as a USB mass storage device
+3. Copy the generated `.uf2` file to the mounted drive
+
+```bash
+# Example for macOS/Linux
+cp celus_default.uf2 /Volumes/RPI-RP2/
+
+# Example for Linux with manual mounting
+sudo mount /dev/sda1 /mnt
+sudo cp celus_default.uf2 /mnt
+sudo umount /mnt
+```
+
+**Subsequent Flashing:**
+- Press the reset button twice quickly while the keyboard is connected
+- Or use the reset keycode if configured in your keymap
+
+### Customization
+
+#### Creating Your Own Keymap
+
+```bash
+# Copy the default keymap as a starting point
+cp -r keyboards/celus/keymaps/default keyboards/celus/keymaps/yourusername
+
+# Edit your keymap
+$EDITOR keyboards/celus/keymaps/yourusername/keymap.c
+
+# Compile your custom keymap
+qmk compile -kb celus -km yourusername
+```
+
+#### Layer Customization
+
+The default firmware includes four layers:
+- **Layer 0**: QWERTY (base layer)
+- **Layer 1**: Lower (numbers, symbols)
+- **Layer 2**: Raise (navigation, function keys)
+- **Layer 3**: Adjust (RGB, audio, keyboard settings)
+
+## Troubleshooting
+
+### Common Issues
+
+**Keyboard not detected:**
+- Ensure the RP2040 is in bootloader mode (hold BOOT while connecting)
+- Try a different USB cable
+- Check that the USB port provides sufficient power
+
+**Compilation errors:**
+- Verify your QMK installation: `qmk doctor`
+- Update QMK: `qmk update`
+- Clear build cache: `qmk clean`
+
+**Keys not registering:**
+- Check your wiring against the pin configuration
+- Verify switch connections
+- Test with a multimeter if necessary
+
+### Getting Help
+
+- [QMK Documentation](https://docs.qmk.fm/)
+- [QMK Discord](https://discord.gg/qmk)
+- [GitHub Issues](https://github.com/rubao13/qmk_firmware/issues)
+
+## Contributing
+
+### Thank you [Natjo](https://gitlab.com/natjo)
+
+Contributions to improve the Celus keyboard support are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is released under the [GPL v2 License](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
