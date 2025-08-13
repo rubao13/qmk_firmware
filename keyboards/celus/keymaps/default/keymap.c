@@ -36,11 +36,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P |BSP│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ A │ S │ D │ F │  G│   │ H │ J │   │ L │ : │ENT│
+     * │SFT│ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ : │ENT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │CTL│ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ - │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │L1 │DEA│Mac│OPT│  SPC  │ W │  `    │'  │ K │LSW│ L2│
+     * │L1 │DEA│Mac│OPT│   |   │SPC│   K   │'  │`  │LSW│ L2│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_QWERTY] = LAYOUT(
@@ -48,28 +48,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
         KC_LCTL,   KC_A,    KC_S,    KC_D,    KC_F, KC_G,           KC_H,   KC_J, KC_K,    KC_L,    KC_SCLN, KC_ENT,
         KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-        MO(1), KC_1, KC_LGUI, KC_LOPT,KC_SPC, KC_W , KC_GRV,       KC_QUOT,  KC_K,   LOGO_SWITCH, MO(2)
+        MO(1), KC_1, KC_LGUI, KC_LOPT,  KC_PIPE,          KC_SPC      ,  KC_K, KC_QUOT,  KC_GRV,   LOGO_SWITCH, MO(2)
         ),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │F1 │F2 │F3 │F4 │F5 │F6 │   │F7 │F8 │F9 │F10│F11│F12│
+     * │PAD│BDO│BUP│F4 │F5 │F6 │   │F7 │F8 │F9 │F10│F11│F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │ | │   │DEA│   │   │   │   │DEA│   │UP │ [ │ ] │ \ │
+     * │ | │ W │DEA│ W │   │   │   │DEA│ Y │ Y │ [ │ ] │ \ │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ ( │ ) │ { │ } │PREV│ │NEXT│LT │DEA│RT │ - │ = │
+     * │   │ ( │   │ { │ } │   │   │   │LT │DEA│ K │ K │ = │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │ ! │ @ │ # │ $ │ % │   │ ^ │ & │ DN│ ( │ ) │   │
+     * │SFT│ ! │ @ │ # │ $ │ % │   │ ^ │ & │HOM│END│UP │   │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │   │   │FLA│LIO│  DEL  │ Y │       │   │   │BAY│   │
+     * │   │   │Mac│LIO│BAYERN │RIO│ CELUS │   │LT │DOW│ RT│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
-        KC_F1, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,         KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, KC_F12,
-        KC_PIPE, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,         KC_NO,   KC_NO,   KC_UP,   KC_LBRC,  KC_RBRC, KC_BSLS,
-        KC_NO, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_MPRV,       KC_MNXT, KC_LEFT, KC_ASTR, KC_RIGHT, KC_MINS, KC_EQL,
-        KC_LSFT, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,       KC_CIRC, KC_AMPR, KC_DOWN, KC_LPRN,  KC_RPRN, KC_NO,
-        KC_NO, KC_NO, LOGO_FLAMENGO, LOGO_LION  , KC_DEL, KC_Y,      KC_NO,   KC_NO,   KC_NO,    LOGO_CELUS,   KC_NO
+        KC_LPAD, KC_BRID,   KC_BRIU,   KC_F4,   KC_F5,   KC_F6,         KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, KC_F12,
+        KC_PIPE, KC_W,   KC_NO,  KC_W,   KC_NO,   KC_NO,         KC_NO,   KC_Y,   KC_Y,   KC_LBRC,  KC_RBRC, KC_BSLS,
+        KC_NO, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_NO,       KC_NO, KC_LEFT, KC_ASTR, KC_K, KC_K, KC_EQL,
+        KC_LSFT, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,       KC_CIRC, KC_AMPR, KC_HOME, KC_END,  KC_UP, KC_NO,
+        KC_NO, KC_NO, KC_LGUI, LOGO_LION  , LOGO_BAYERN, LOGO_RIO,      LOGO_CELUS,   KC_NO,   KC_LEFT,    KC_DOWN,   KC_RIGHT
         ),
     /*
      * _RAISE
@@ -181,7 +181,7 @@ bool oled_task_user(void) {
             render_celus();
             break;
         default:
-            render_flamengo();
+            render_rio();
             break;
     }
     return false;
