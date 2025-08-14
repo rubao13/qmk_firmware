@@ -36,9 +36,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P |BSP│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ : │ENT│
+     * │CTL│ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ : │ENT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CTL│ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ - │
+     * │SFT│ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ - │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
      * │L1 │DEA│ | │OPT│  Mac  │SPC│   K   │'  │`  │LSW│ L2│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
         KC_LCTL,   KC_A,    KC_S,    KC_D,    KC_F, KC_G,           KC_H,   KC_J, KC_K,    KC_L,    KC_SCLN, KC_ENT,
         KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-        MO(1), KC_1, KC_PIPE, KC_LOPT, KC_LGUI ,          KC_SPC      ,  KC_K, KC_QUOT,  KC_GRV,   LOGO_SWITCH, MO(2)
+        KC_LGUI, KC_1, KC_PIPE, KC_LOPT, MO(1) ,          KC_SPC      ,  KC_K, KC_QUOT,  KC_GRV,   LOGO_SWITCH, MO(2)
         ),
     /*
      * LOWER
@@ -57,19 +57,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤        
      * │ | │ W │DEA│ W │   │   │   │DEA│ Y │ Y │ [ │ ] │ \ │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │ ( │   │ { │ } │   │   │   │LT │DEA│ K │ K │ENT│
+     * │CAP│ ( │   │ { │ } │   │   │   │LT │DEA│ K │ K │ENT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │SFT│ ! │ @ │ # │ $ │ % │   │ ^ │ & │HOM│END│UP │   │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │   │   │Mac│LIO│   \   │RIO│ CELUS │BAY│LT │DOW│ RT│
+     * │   │   │ \ │LIO│  Mac  │RIO│ CELUS │BAY│LT │DOW│ RT│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
         KC_LPAD, KC_BRID,   KC_BRIU,   KC_F4,   KC_F5,   KC_F6,         KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11, KC_F12,
-        KC_PIPE, KC_W,   KC_NO,  KC_W,   KC_NO,   KC_NO,         KC_NO,   KC_Y,   KC_Y,   KC_LBRC,  KC_RBRC, KC_BSLS,
-        KC_NO, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_NO,       KC_NO, KC_LEFT, KC_ASTR, KC_K, KC_K, KC_ENT,
+        KC_PIPE, KC_W,  KC_W,  KC_W,   KC_NO,   KC_NO,         KC_Y,   KC_Y,   KC_Y,   KC_LBRC,  KC_RBRC, KC_BSLS,
+        KC_CAPS, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_NO,       KC_NO, KC_K, KC_K, KC_K, KC_K, KC_ENT,
         KC_LSFT, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,       KC_CIRC, KC_AMPR, KC_HOME, KC_END,  KC_UP, KC_NO,
-        KC_NO, KC_NO, KC_LGUI, LOGO_LION  , KC_BSLS, LOGO_RIO,      LOGO_CELUS,   LOGO_BAYERN,   KC_LEFT,    KC_DOWN,   KC_RIGHT
+        KC_NO, KC_NO, KC_BSLS, LOGO_LION  , KC_LGUI, LOGO_RIO,      LOGO_CELUS,   LOGO_BAYERN,   KC_LEFT,    KC_DOWN,   KC_RIGHT
         ),
     /*
      * _RAISE
@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │   │ 1 │ 2 │ 3 │   │   │   │   │   │   │   │   │   │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │   │   │ 0 │ . │   /   │ENT│       │   │   │LSW│   │
+     * │   │   │ / │ . │  Mac  │ENT│       │   │   │LSW│   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, KC_7,  KC_8,  KC_9,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_LCBR,   KC_RCBR,   KC_NO,
         KC_NO, KC_4,  KC_5,  KC_6,   KC_NO,  KC_VOLD,        KC_VOLU, KC_LPRN, KC_RPRN, KC_NO, KC_NO, KC_EQL,
         KC_NO, KC_1,  KC_2,  KC_3,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO, KC_NO, KC_0,  KC_DOT,         KC_SLSH, KC_ENT, KC_NO,            KC_NO,   KC_NO,   LOGO_SWITCH,   KC_NO
+        KC_NO, KC_NO, KC_SLSH,  KC_DOT,         KC_LGUI, KC_ENT, KC_NO,            KC_NO,   KC_NO,   LOGO_SWITCH,   KC_NO
         ),
     /*
      * This layer is not used currently
@@ -130,7 +130,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LOGO_SWITCH:
             if (record->event.pressed) {
-                current_logo = (current_logo + 1) % 5; // Cycle through 0, 1, 2, 3, 4
+                current_logo = (current_logo + 1) % 7; // Cycle through 0, 1, 2, 3, 4, 5, 6
             }
             break;
         case LOGO_LION:
@@ -166,7 +166,7 @@ bool oled_task_user(void) {
     // Switch between logos based on current_logo variable
     switch (current_logo) {
         case 0:
-            render_flamengo();
+            render_rio();
             break;
         case 1:
             render_lion();
@@ -175,10 +175,16 @@ bool oled_task_user(void) {
             render_bayern();
             break;
         case 3:
-            render_rio();
+            render_flamengo();
             break;
         case 4:
             render_celus();
+            break;
+        case 5:
+            render_theoffice();
+            break;
+        case 6:
+            render_lunch();
             break;
         default:
             render_rio();
