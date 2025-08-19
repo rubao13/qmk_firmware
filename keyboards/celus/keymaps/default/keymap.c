@@ -5,6 +5,12 @@
 #include QMK_KEYBOARD_H
 #include "lib/logos.h"
 #include "lib/wpm.h"
+// Standard headers for types used in some IDE linters
+#include <stdint.h>
+#include <stdbool.h>
+
+// Helper to open apps via macOS Spotlight (Cmd+Space -> type -> Enter)
+static void open_using_spotlight(const char *name);
 
 enum layer_number {
     _QWERTY = 0,
@@ -26,7 +32,10 @@ enum custom_keycodes {
     BRAVE_OPEN,
     ZOOM_OPEN,
     NOTES_OPEN,
-    WIREVPN_OPEN
+    WIREVPN_OPEN,
+    SAFARI_OPEN,
+    FIREFOX_OPEN,
+    MATTERMOST_OPEN
 };
 
 // Variable to track current logo
@@ -43,45 +52,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P |BSP│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CTL│ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ : │ENT│
+     * │CTL│ A │ S │ D │ G │ F │   │ H │ J │ K │ L │ : │ENT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │SFT│ Z │ X │ C │ V │ B │   │ N │ M │ / │ , │ . │ - │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│ 1 │ L1│OPT│   W   │SPC│   K   │ ' │ ` │ | │L2 │
+     * │Mac│ 1 │ L1│ W │  OPT  │SPC│   K   │ ' │ ` │ | │L2 │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_QWERTY] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4, KC_5,           KC_6,   KC_7, KC_8,    KC_9,    KC_0, KC_KB_MUTE,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
-        KC_LCTL,   KC_A,    KC_S,    KC_D,    KC_F, KC_G,           KC_H,   KC_J, KC_K,    KC_L,    KC_SCLN, KC_ENT,
+        KC_LCTL,   KC_A,    KC_S,    KC_D,   KC_G, KC_F,           KC_H,   KC_J, KC_K,    KC_L,    KC_SCLN, KC_ENT,
         KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_SLSH, KC_COMM,  KC_DOT, KC_MINS,
-        KC_LGUI, KC_1, MO(1), KC_LOPT, KC_W ,          KC_SPC      ,  KC_K, KC_QUOT,  KC_GRV,   KC_PIPE, MO(2)
+        KC_LGUI, KC_1, MO(1), KC_W, KC_LOPT ,          KC_SPC      ,  KC_K, KC_QUOT,  KC_GRV,   KC_PIPE, MO(2)
         ),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
      * │MCT│BDO│BUP│VPN│F5 │F6 │   │F7 │F8 │F9 │ { │ } │F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤        
-     * │ | │ W │DEA│ W │   │   │   │DEA│ Y │ Y │ [ │ ] │DEL│
+     * │ | │ W │DEA│ W │RIO│TOF│   │DEA│ Y │ Y │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CAP│PAD│   │ { │ } │   │   │   │LT │DEA│ K │ K │ = │
+     * │CAP│PAD│SAF│   │   │FIR│   │   │LT │DEA│ K │ K │ = │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │SFT│ZOO│ @ │ # │ $ │BRA│   │NOT│MCT│ \ │   │UP │ + │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│   │   │   │ LION │LOGOS│CELUS │BAY│LEF│DOW│RIG│
+     * │Mac│   │   │LUN│ LION │LOGOS│CELUS │BAY│LEF│DOW│RIG│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
     KC_MCTL, KC_BRID,   KC_BRIU,   WIREVPN_OPEN,   KC_F5,   KC_F6,         KC_F7,   KC_F8,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
-        KC_PIPE, KC_W,  KC_W,  KC_W,   KC_NO,   KC_NO,         KC_Y,   KC_Y,   KC_Y,   KC_LBRC,  KC_RBRC, KC_DEL,
-    KC_CAPS, KC_LPAD, KC_RPRN, KC_LCBR, KC_RCBR, KC_NO,       KC_NO, KC_K, KC_K, KC_K, KC_K, KC_EQL,
+        KC_PIPE, KC_W,  KC_W,  KC_W,   LOGO_RIO,   LOGO_THEOFFICE,         KC_Y,   KC_Y,   KC_Y,   KC_LBRC,  KC_RBRC, KC_DEL,
+    KC_CAPS, KC_LPAD, SAFARI_OPEN, KC_LCBR, KC_NO, FIREFOX_OPEN,       KC_NO, KC_K, KC_K, KC_K, KC_K, KC_EQL,
     KC_LSFT, ZOOM_OPEN, KC_AT,   KC_HASH, KC_DLR,  BRAVE_OPEN,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_PLUS,
-        KC_LGUI, KC_NO, KC_NO, KC_NO  ,LOGO_LION , LOGO_SWITCH,      LOGO_CELUS,   LOGO_BAYERN,   KC_LEFT,    KC_DOWN,   KC_RIGHT
+        KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      LOGO_CELUS,   LOGO_BAYERN,   KC_LEFT,    KC_DOWN,   KC_RIGHT
         ),
     /*
      * _RAISE
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │   │   │   │   │   │   │   │   │   │PRV│PLY│NXT│MUT│
+     * │   │   │   │   │   │   │   │   │   │PRV│PLY│NXT│LOK│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │   │ 7 │ 8 │ 9 │   │   │   │   │   │   │ { │ } │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
@@ -94,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
 
   [_RAISE] = LAYOUT(
-        KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_MPRV,   KC_MPLY,   KC_MNXT,   KC_KB_MUTE,
+        KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_MPRV,   KC_MPLY,   KC_MNXT,   MATTERMOST_OPEN,
         KC_NO, KC_7,  KC_8,  KC_9,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_LCBR,   KC_RCBR,   KC_NO,
         KC_NO, KC_4,  KC_5,  KC_6,   KC_NO,  KC_VOLD,        KC_VOLU, KC_LPRN, KC_RPRN, KC_NO, KC_NO, KC_EQL,
         KC_LSFT, KC_1,  KC_2,  KC_3,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PGUP,   KC_NO,
@@ -177,67 +186,80 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case BRAVE_OPEN:
             if (record->event.pressed) {
-                // macOS: Open Spotlight, type Brave, press Enter
-                tap_code16(G(KC_SPC));
-                wait_ms(200);
-                SEND_STRING("Brave\n");
+                open_using_spotlight("Brave");
             }
             return false;
         case ZOOM_OPEN:
             if (record->event.pressed) {
-                // macOS: Open Spotlight, type Zoom, press Enter
-                tap_code16(G(KC_SPC));
-                wait_ms(200);
-                SEND_STRING("Zoom\n");
+                open_using_spotlight("Zoom");
             }
             return false;
         case NOTES_OPEN:
             if (record->event.pressed) {
-                // macOS: Open Spotlight, type Notes, press Enter
-                tap_code16(G(KC_SPC));
-                wait_ms(200);
-                SEND_STRING("Notes\n");
+                open_using_spotlight("Notes");
             }
             return false;
         case WIREVPN_OPEN:
             if (record->event.pressed) {
-                // macOS: Open Spotlight, type WireGuard, press Enter
-                tap_code16(G(KC_SPC));
-                wait_ms(200);
-                SEND_STRING("WireGuard\n");
+                open_using_spotlight("WireGuard");
+            }
+            return false;
+        case SAFARI_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Safari");
+            }
+            return false;
+        case FIREFOX_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Firefox");
+            }
+            return false;
+        case MATTERMOST_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Mattermost");
             }
             return false;
     }
     return true;
 }
 
+// macOS: Open Spotlight, type NAME, press Enter
+static void open_using_spotlight(const char *name) {
+    tap_code16(G(KC_SPC));
+    wait_ms(200);
+    send_string_with_delay(name, 0);
+    tap_code(KC_ENT);
+}
+
 bool oled_task_user(void) {
-    // Switch between logos based on current_logo variable
-    switch (current_logo) {
-        case 0:
-            render_rio();
-            break;
-        case 1:
-            render_lion();
-            break;
-        case 2:
-            render_bayern();
-            break;
-        case 3:
-            render_flamengo();
-            break;
-        case 4:
-            render_celus();
-            break;
-        case 5:
-            render_theoffice();
-            break;
-        case 6:
-            render_lunch();
-            break;
-        default:
-            render_rio();
-            break;
+    // Show layer-specific images; on base layer, honor the selected current_logo
+    uint8_t layer = get_highest_layer(layer_state);
+    if (layer == _QWERTY) {
+        switch (current_logo) {
+            case 0: render_theoffice(); break;
+            case 1: render_lion(); break;
+            case 2: render_bayern(); break;
+            case 3: render_flamengo(); break;
+            case 4: render_celus(); break;
+            case 5: render_rio(); break;
+            case 6: render_lunch(); break;
+            default: render_celus(); break;
+        }
+    } else {
+        switch (layer) {
+            case _LOWER:
+                render_lower();
+                break;
+            case _RAISE:
+                render_raise();
+                break;
+            case _ADJUST:
+                render_flamengo();
+                break;
+            default:
+                render_celus();
+                break;
+        }
     }
     return false;
 }
