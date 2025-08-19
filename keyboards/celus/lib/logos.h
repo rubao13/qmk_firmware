@@ -7,3 +7,5 @@ void render_rio(void);
 void render_celus(void);
 void render_theoffice(void);
 void render_lunch(void);
+void render_2ndfloor(void);
+void render_keller(void);
