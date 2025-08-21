@@ -29,13 +29,15 @@ enum custom_keycodes {
     LOGO_CELUS,
     LOGO_THEOFFICE,
     LOGO_LUNCH,
+    LOGO_TOMORROWLAND,
     BRAVE_OPEN,
     ZOOM_OPEN,
     NOTES_OPEN,
     WIREVPN_OPEN,
     SAFARI_OPEN,
     FIREFOX_OPEN,
-    MATTERMOST_OPEN
+    MATTERMOST_OPEN,
+    CALCULATOR_OPEN
 };
 
 // Variable to track current logo
@@ -54,60 +56,60 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │CTL│ A │ S │ D │ G │ F │   │ H │ J │ K │ L │ : │ENT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ Z │ X │ C │ V │ B │   │ N │ M │ / │ , │ . │ - │
+     * │SFT│ Z │ X │ C │ V │ B │   │ N │ M │ / │ , │ . │SFT│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│ 1 │ L1│ W │  OPT  │SPC│   K   │ ' │ ` │ | │L2 │
+     * │Mac│ L1│ = │OPT│  MCL  │SPC│   -   │ ' │ ` │ L2│ | │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_QWERTY] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4, KC_5,           KC_6,   KC_7, KC_8,    KC_9,    KC_0, KC_KB_MUTE,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
         KC_LCTL,   KC_A,    KC_S,    KC_D,   KC_G, KC_F,           KC_H,   KC_J, KC_K,    KC_L,    KC_SCLN, KC_ENT,
-        KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_SLSH, KC_COMM,  KC_DOT, KC_MINS,
-        KC_LGUI, KC_1, MO(1), KC_W, KC_LOPT ,          KC_SPC      ,  KC_K, KC_QUOT,  KC_GRV,   KC_PIPE, MO(2)
+        KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_SLSH, KC_COMM,  KC_DOT, KC_RSFT,
+        KC_LGUI, MO(1), KC_EQL, KC_LOPT, KC_MCTL ,          KC_SPC      ,  KC_MINS, KC_QUOT,  KC_GRV,   MO(2), KC_PIPE
         ),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │MCT│BDO│BUP│VPN│F5 │F6 │   │F7 │F8 │F9 │ { │ } │F12│
+     * │MCL│BDO│BUP│PAD│CAL│F6 │   │F7 │F8 │F9 │ { │ } │F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤        
-     * │ | │ W │DEA│ W │RIO│TOF│   │DEA│ Y │ Y │ [ │ ] │DEL│
+     * │ | │ W │   │ W │RIO│TOF│   │   │ Y │ Y │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CAP│PAD│SAF│   │   │FIR│   │   │LT │DEA│ K │ K │ = │
+     * │CAP│   │SAF│   │   │FRX│   │   │LT │   │ K │ K │ = │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ZOO│ @ │ # │ $ │BRA│   │NOT│MCT│ \ │   │UP │ + │
+     * │SFT│ZOO│ @ │   │VPN│BRA│   │NOT│MCT│ \ │   │UP │ + │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│   │   │LUN│ LION │LOGOS│CELUS │BAY│LEF│DOW│RIG│
+     * │Mac│L1D│   │LUN│ LION │LOGOS│CELUS │TML│LEF│DOW│RIG│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
-    KC_MCTL, KC_BRID,   KC_BRIU,   WIREVPN_OPEN,   KC_F5,   KC_F6,         KC_F7,   KC_F8,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
+    KC_MCTL, KC_BRID,   KC_BRIU,   KC_LPAD,   CALCULATOR_OPEN,   KC_F6,         KC_F7,   KC_F8,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
         KC_PIPE, KC_W,  KC_W,  KC_W,   LOGO_RIO,   LOGO_THEOFFICE,         KC_Y,   KC_Y,   KC_Y,   KC_LBRC,  KC_RBRC, KC_DEL,
-    KC_CAPS, KC_LPAD, SAFARI_OPEN, KC_LCBR, KC_NO, FIREFOX_OPEN,       KC_NO, KC_K, KC_K, KC_K, KC_K, KC_EQL,
-    KC_LSFT, ZOOM_OPEN, KC_AT,   KC_HASH, KC_DLR,  BRAVE_OPEN,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_PLUS,
-        KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      LOGO_CELUS,   LOGO_BAYERN,   KC_LEFT,    KC_DOWN,   KC_RIGHT
+    KC_CAPS, KC_NO, SAFARI_OPEN, KC_LCBR, KC_NO, FIREFOX_OPEN,       KC_NO, KC_K, KC_K, KC_K, KC_K, KC_EQL,
+    KC_LSFT, ZOOM_OPEN, KC_AT,   CALCULATOR_OPEN, WIREVPN_OPEN,  BRAVE_OPEN,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_PLUS,
+        KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      LOGO_CELUS,   LOGO_TOMORROWLAND,   KC_LEFT,    KC_DOWN,   KC_RIGHT
         ),
     /*
      * _RAISE
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │   │   │   │   │   │   │   │   │   │PRV│PLY│NXT│LOK│
+     * │LOK│ 1 │ 2 │ 3 │   │   │   │   │   │PRV│PLY│NXT│FIR│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │ 7 │ 8 │ 9 │   │   │   │   │   │   │ { │ } │   │
+     * │   │ 4 │ 5 │ 6 │   │   │   │   │   │   │ { │ } │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │ 4 │ 5 │ 6 │   │VOL+│ │VOL-│ ( │ ) │   │   │ = │
+     * │   │ 7 │ 8 │ 9 │   │VOL+│ │VOL-│ ( │ ) │   │   │ = │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ 1 │ 2 │ 3 │   │   │   │   │   │   │   │PGU│   │
+     * │SFT│ . │ 0 │   │   │   │   │   │   │   │   │   │SFT│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│   │ / │ . │FIRMWAR│ENT│       │   │   │PGD│   │
+     * │Mac│ * │ + │ - │   /   │ENT│       │PGU│PGD│L2D│   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
   [_RAISE] = LAYOUT(
-        KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_MPRV,   KC_MPLY,   KC_MNXT,   MATTERMOST_OPEN,
-        KC_NO, KC_7,  KC_8,  KC_9,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_LCBR,   KC_RCBR,   KC_NO,
-        KC_NO, KC_4,  KC_5,  KC_6,   KC_NO,  KC_VOLD,        KC_VOLU, KC_LPRN, KC_RPRN, KC_NO, KC_NO, KC_EQL,
-        KC_LSFT, KC_1,  KC_2,  KC_3,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PGUP,   KC_NO,
-        KC_LGUI, KC_NO, KC_NO,  KC_NO,         QK_BOOT, KC_ENT, KC_NO,            KC_NO,   KC_NO,   KC_PGDN,   KC_NO
+        MATTERMOST_OPEN, KC_1, KC_2, KC_3,  KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_MPRV,   KC_MPLY,   KC_MNXT,   QK_BOOT,
+        KC_NO, KC_4,  KC_5,  KC_6,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_LCBR,   KC_RCBR,   KC_NO,
+        KC_NO, KC_7,  KC_8,  KC_9,   KC_NO,  KC_VOLD,        KC_VOLU, KC_LPRN, KC_RPRN, KC_NO, KC_SCLN, KC_EQL,
+        KC_LSFT, KC_DOT,  KC_0,  KC_NO,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO ,   KC_RSFT,
+        KC_LGUI, KC_PAST, KC_PLUS,  KC_MINS,    KC_SLSH,       KC_ENT,     KC_NO,    KC_PGUP,   KC_PGDN,   KC_NO,   KC_NO
         ),
     /*
      * This layer is not used currently
@@ -146,7 +148,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LOGO_SWITCH:
             if (record->event.pressed) {
-                current_logo = (current_logo + 1) % 10; // Cycle through 0..9
+                current_logo = (current_logo + 1) % 8; // Cycle through 0..7
             }
             break;
         case LOGO_LION:
@@ -156,7 +158,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case LOGO_FLAMENGO:
             if (record->event.pressed) {
-                current_logo = 0;
+                current_logo = 3;
             }
             break;
         case LOGO_BAYERN:
@@ -166,7 +168,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case LOGO_RIO:
             if (record->event.pressed) {
-                current_logo = 3;
+                current_logo = 5;
             }
             break;
         case LOGO_CELUS:
@@ -176,12 +178,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case LOGO_THEOFFICE:
             if (record->event.pressed) {
-                current_logo = 5;
+                current_logo = 0;
             }
             break;
         case LOGO_LUNCH:
             if (record->event.pressed) {
                 current_logo = 6;
+            }
+            break;
+        case LOGO_TOMORROWLAND:
+            if (record->event.pressed) {
+                current_logo = 7;
             }
             break;
         case BRAVE_OPEN:
@@ -219,6 +226,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 open_using_spotlight("Mattermost");
             }
             return false;
+        case CALCULATOR_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Calculator");
+            }
+            return false;
     }
     return true;
 }
@@ -236,14 +248,15 @@ bool oled_task_user(void) {
     uint8_t layer = get_highest_layer(layer_state);
     if (layer == _QWERTY) {
         switch (current_logo) {
-            case 0: render_theoffice(); break;
+            case 0: render_rio(); break;
             case 1: render_lion(); break;
             case 2: render_bayern(); break;
             case 3: render_flamengo(); break;
             case 4: render_celus(); break;
             case 5: render_rio(); break;
             case 6: render_lunch(); break;
-            default: render_celus(); break;
+            case 7: render_theoffice(); break;
+            default: render_rio(); break;
         }
     } else {
         switch (layer) {
@@ -254,7 +267,7 @@ bool oled_task_user(void) {
                 render_raise();
                 break;
             case _ADJUST:
-                render_flamengo();
+                render_rio();
                 break;
             default:
                 render_celus();
