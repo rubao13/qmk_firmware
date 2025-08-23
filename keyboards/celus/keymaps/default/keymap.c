@@ -37,7 +37,10 @@ enum custom_keycodes {
     SAFARI_OPEN,
     FIREFOX_OPEN,
     MATTERMOST_OPEN,
-    CALCULATOR_OPEN
+    CALCULATOR_OPEN,
+    MONITOR_OPEN,
+    AWS_SSO,
+    TERMINAL_OPEN
 };
 
 // Variable to track current logo
@@ -54,40 +57,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P |BSP│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CTL│ A │ S │ D │ G │ F │   │ H │ J │ K │ L │ : │ENT│
+     * │CTL│ A │ S │ D │ G │ F │   │ H │ J │ K │ L │ ` │ENT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ Z │ X │ C │ V │ B │   │ N │ M │ / │ , │ . │SFT│
+     * │SFT│ Z │ X │ C │ V │ B │   │ N │ M │ / │ ' │ ; │SFT│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│ L1│ = │OPT│  MCL  │SPC│   -   │ ' │ ` │ L2│ | │
+     * │Mac│ L1│ = │OPT│  MCL  │SPC│   |   │ , │ . │ L2│ - │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_QWERTY] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4, KC_5,           KC_6,   KC_7, KC_8,    KC_9,    KC_0, KC_KB_MUTE,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
-        KC_LCTL,   KC_A,    KC_S,    KC_D,   KC_G, KC_F,           KC_H,   KC_J, KC_K,    KC_L,    KC_SCLN, KC_ENT,
-        KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_SLSH, KC_COMM,  KC_DOT, KC_RSFT,
-        KC_LGUI, MO(1), KC_EQL, KC_LOPT, KC_MCTL ,          KC_SPC      ,  KC_MINS, KC_QUOT,  KC_GRV,   MO(2), KC_PIPE
+        KC_LCTL,   KC_A,    KC_S,    KC_D,   KC_G, KC_F,           KC_H,   KC_J, KC_K,    KC_L,    KC_GRV, KC_ENT,
+        KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_SLSH, KC_QUOT,  KC_SCLN, KC_RSFT,
+        KC_LGUI, MO(1), KC_EQL, KC_LOPT, KC_MCTL ,          KC_SPC      ,  KC_PIPE, KC_COMM,  KC_DOT,   MO(2), KC_MINS
         ),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │MCL│BDO│BUP│PAD│CAL│F6 │   │F7 │F8 │F9 │ { │ } │F12│
-     * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤        
-     * │ | │ W │   │ W │RIO│TOF│   │   │ Y │ Y │ [ │ ] │DEL│
+     * │MCL│BDO│BUP│PAD│CAL│CPU│   │F7 │F8 │F9 │ { │ } │F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CAP│   │SAF│   │   │FRX│   │   │LT │   │ K │ K │ = │
+     * │SAF│   │   │   │RIO│TER│   │   │   │   │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ZOO│ @ │   │VPN│BRA│   │NOT│MCT│ \ │   │UP │ + │
+     * │CAP│AWS│   │   │   │FRX│   │   │   │   │   │   │ = │
+     * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+     * │SFT│ZOO│   │   │VPN│BRA│   │NOT│MCT│ \ │   │UP │ + │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│L1D│   │LUN│ LION │LOGOS│CELUS │TML│LEF│DOW│RIG│
+     * │Mac│L1D│   │LUN│ LION │LOGOS│  \   │CEL│LEF│DOW│RIG│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
-    KC_MCTL, KC_BRID,   KC_BRIU,   KC_LPAD,   CALCULATOR_OPEN,   KC_F6,         KC_F7,   KC_F8,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
-        KC_PIPE, KC_W,  KC_W,  KC_W,   LOGO_RIO,   LOGO_THEOFFICE,         KC_Y,   KC_Y,   KC_Y,   KC_LBRC,  KC_RBRC, KC_DEL,
-    KC_CAPS, KC_NO, SAFARI_OPEN, KC_LCBR, KC_NO, FIREFOX_OPEN,       KC_NO, KC_K, KC_K, KC_K, KC_K, KC_EQL,
-    KC_LSFT, ZOOM_OPEN, KC_AT,   CALCULATOR_OPEN, WIREVPN_OPEN,  BRAVE_OPEN,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_PLUS,
-        KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      LOGO_CELUS,   LOGO_TOMORROWLAND,   KC_LEFT,    KC_DOWN,   KC_RIGHT
+    KC_MCTL, KC_BRID,   KC_BRIU,   KC_LPAD,   CALCULATOR_OPEN,   MONITOR_OPEN,         KC_F7,   KC_F8,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
+    SAFARI_OPEN, KC_NO,  KC_NO,  KC_NO,   KC_NO,   TERMINAL_OPEN,         KC_NO,   KC_NO,   KC_NO,   KC_LBRC,  KC_RBRC, KC_DEL,
+    KC_CAPS, AWS_SSO, KC_NO, KC_NO, KC_NO, FIREFOX_OPEN,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_EQL,
+    KC_LSFT, ZOOM_OPEN, KC_NO,   KC_NO, KC_NO,  BRAVE_OPEN,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_PLUS,
+        KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      KC_BSLS,   LOGO_CELUS,   KC_LEFT,    KC_DOWN,   KC_RIGHT
         ),
     /*
      * _RAISE
@@ -193,7 +196,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case BRAVE_OPEN:
             if (record->event.pressed) {
-                open_using_spotlight("Brave");
+                open_using_spotlight("Brave Brow");
             }
             return false;
         case ZOOM_OPEN:
@@ -229,6 +232,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CALCULATOR_OPEN:
             if (record->event.pressed) {
                 open_using_spotlight("Calculator");
+            }
+            return false;
+        case MONITOR_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Monit");
+            }
+            return false;
+        case TERMINAL_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Terminal");
+            }
+            return false;
+        case AWS_SSO:
+            if (record->event.pressed) {
+                // Fixed smart quotes. Optionally append Enter: SS_TAP(X_ENTER)
+                SEND_STRING("aws sso login" SS_TAP(X_ENTER));
             }
             return false;
     }
