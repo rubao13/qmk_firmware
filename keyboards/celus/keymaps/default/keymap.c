@@ -74,22 +74,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │MCL│BDO│BUP│PAD│CAL│CPU│   │F7 │F8 │F9 │ { │ } │F12│
+     * │PAD│BDO│BUP│VPN│CAL│CPU│   │ZOO│F8 │F9 │ { │ } │F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │SAF│   │   │   │RIO│TER│   │   │   │   │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │CAP│AWS│   │   │   │FRX│   │   │   │   │   │   │ = │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ZOO│   │   │VPN│BRA│   │NOT│MCT│ \ │   │UP │ + │
+     * │SFT│   │   │   │   │BRA│   │NOT│MCT│ \ │   │UP │ + │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
      * │Mac│L1D│   │LUN│ LION │LOGOS│  \   │CEL│LEF│DOW│RIG│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
-    KC_MCTL, KC_BRID,   KC_BRIU,   KC_LPAD,   CALCULATOR_OPEN,   MONITOR_OPEN,         KC_F7,   KC_F8,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
+    KC_LPAD, KC_BRID,   KC_BRIU,   WIREVPN_OPEN,   CALCULATOR_OPEN,   MONITOR_OPEN,         ZOOM_OPEN,   KC_F8,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
     SAFARI_OPEN, KC_NO,  KC_NO,  KC_NO,   KC_NO,   TERMINAL_OPEN,         KC_NO,   KC_NO,   KC_NO,   KC_LBRC,  KC_RBRC, KC_DEL,
     KC_CAPS, AWS_SSO, KC_NO, KC_NO, KC_NO, FIREFOX_OPEN,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_EQL,
-    KC_LSFT, ZOOM_OPEN, KC_NO,   KC_NO, KC_NO,  BRAVE_OPEN,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_PLUS,
+    KC_LSFT, KC_NO, KC_NO,   KC_NO, KC_NO,  BRAVE_OPEN,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_PLUS,
         KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      KC_BSLS,   LOGO_CELUS,   KC_LEFT,    KC_DOWN,   KC_RIGHT
         ),
     /*
@@ -181,7 +181,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case LOGO_THEOFFICE:
             if (record->event.pressed) {
-                current_logo = 0;
+                current_logo = 7;
             }
             break;
         case LOGO_LUNCH:
@@ -191,7 +191,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case LOGO_TOMORROWLAND:
             if (record->event.pressed) {
-                current_logo = 7;
+                current_logo = 0;
             }
             break;
         case BRAVE_OPEN:
@@ -267,7 +267,7 @@ bool oled_task_user(void) {
     uint8_t layer = get_highest_layer(layer_state);
     if (layer == _QWERTY) {
         switch (current_logo) {
-            case 0: render_rio(); break;
+            case 0: render_tomorrowland(); break;
             case 1: render_lion(); break;
             case 2: render_bayern(); break;
             case 3: render_flamengo(); break;
@@ -275,7 +275,7 @@ bool oled_task_user(void) {
             case 5: render_rio(); break;
             case 6: render_lunch(); break;
             case 7: render_theoffice(); break;
-            default: render_rio(); break;
+            default: render_tomorrowland(); break;
         }
     } else {
         switch (layer) {

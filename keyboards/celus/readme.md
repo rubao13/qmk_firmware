@@ -137,6 +137,69 @@ The default firmware includes four layers:
 - **Layer 2**: Raise (navigation, function keys)
 - **Layer 3**: Adjust (RGB, audio, keyboard settings)
 
+### Adding a Custom OLED Logo / Bitmap
+
+Use the helper script `jpg-converter.py` to turn any JPG/PNG into a monochrome byte array for the OLED.
+
+1. (Optional) Install Pillow if not already available inside your environment:
+	```bash
+	pip install Pillow
+	```
+2. Run the converter (example):
+	```bash
+	python keyboards/celus/lib/jpg-converter.py my_logo.png keyboards/celus/lib/my_logo.inc -n my_logo_bitmap -w 128 -H 64 -t 128
+	```
+	Parameters:
+	- `input`: source image path
+	- `output`: destination file (e.g. `.inc`, `.h`)
+	- `-n/--name`: C array symbol (wraps output in `const uint8_t name[] PROGMEM`)
+	- `-w/--width`: resize width (default 128)
+	- `-H/--height`: resize height (default 64, must be multiple of 8)
+	- `-t/--threshold`: black/white cutoff 0–255 (default 128)
+
+3. Include the generated file and add a render function in `keyboards/celus/lib/logos.c`:
+	```c
+	#include "my_logo.inc"  // after other includes
+
+	void render_my_logo(void) {
+		 oled_write_raw_P(my_logo_bitmap, sizeof(my_logo_bitmap));
+	}
+	```
+4. Declare the function in `keyboards/celus/lib/logos.h`:
+	```c
+	void render_my_logo(void);
+	```
+5. Map it in your `keymap.c` logic (either in the base logo switch or layer logic). Example addition inside `oled_task_user()` base layer switch:
+	```c
+	case 8: render_my_logo(); break; // ensure current_logo cycling covers this index
+	```
+6. (Optional) Add a keycode so you can select it:
+	```c
+	enum custom_keycodes {
+		 // ... existing ...
+		 LOGO_MYLOGO,
+	};
+
+	case LOGO_MYLOGO:
+		 if (record->event.pressed) { current_logo = 8; }
+		 break;
+	```
+7. Rebuild and flash:
+	```bash
+	qmk compile -kb celus -km default
+	```
+
+Tips:
+- Prefer high‑contrast images; simplify to solid shapes.
+- Adjust `-t` if too dark (raise it) or too light (lower it).
+- Keep height a multiple of 8 (OLED page requirement).
+- You can collect several bitmaps in one `.inc` file.
+
+Troubleshooting:
+- Blank screen: Check size (128x64) and that you call the correct render function.
+- Distorted image: Don’t edit the generated hex order; regenerate instead.
+- Compile error: Ensure `render_my_logo` is declared in `logos.h` and referenced where used.
+
 ## Troubleshooting
 
 ### Common Issues
