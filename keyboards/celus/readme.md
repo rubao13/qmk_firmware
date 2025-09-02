@@ -32,13 +32,13 @@ QWERTY Layer:
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
 │ESC│ 1 │ 2 │ 3 │ 4 │ 5 │   │ 6 │ 7 │ 8 │ 9 │ 0 │MUT│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P |BSP│
+│TAB│ Q │ J │ E │ R │ T │   │ W │ U │ I │ O │ P |BSP│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│CTL│ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ : │ENT│
+│CTL│ A │ S │ D │ G │ B │   │ F │ Y │ K │ L │ ` │ENT│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│SFT│ Z │ X │ C │ V │ B │   │ N │ M │ / │ , │ . │ - │
+│SFT│L1 │ Z │ X │ C │ V │   │ N │ M │ / │ ' │ L2│SFT│
 ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-│Mac│ 1 │ L1│OPT│   W   │SPC│   K   │ ' │ ` │ | │ L2│
+│Mac│ ; │ = │OPT│  MCL  │SPC│   |   │ - │ , │ H │ . │
 └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
 ```
 
@@ -133,9 +133,48 @@ qmk compile -kb celus -km yourusername
 
 The default firmware includes four layers:
 - **Layer 0**: QWERTY (base layer)
-- **Layer 1**: Lower (numbers, symbols)
-- **Layer 2**: Raise (navigation, function keys)
+- **Layer 1**: Lower (symbols, arrows, logos and shortcuts)
+- **Layer 2**: Raise (apps shortcuts, music, firmware update)
 - **Layer 3**: Adjust (RGB, audio, keyboard settings)
+
+#### Layers LOWER & RAISE Shortcuts table
+| Layer | QWERTY match |  Function |  Description |
+|-------|--------------|-----------|--------------|
+|LOWER |ESC|KC_LPAD| Mac Lauchpad|
+|LOWER |1|KC_BRID| Lower Brigth|
+|LOWER |2|KC_BRIU| Raise Brigth|
+|LOWER |3|WIREVPN_OPEN| Open Wireguard VPN app|
+|LOWER |4|CALCULATOR_OPEN| Open Calculator|
+|LOWER |5|MONITOR_OPEN| Open System monitor|
+|LOWER |6|ZOOM_OPEN| Open Zoom|
+|LOWER |7|CODE_OPEN| Open VS Code|
+|LOWER |T|TERMINAL_OPEN| Terminal |
+|LOWER |N|NOTES_OPEN| Open Notes app |
+|LOWER| M | KC_MCTL| Mac Mission Control|
+
+ 
+| Layer | QWERTY key |  Function |  Description |
+|-------|--------------|-----------|--------------|
+|RAISE |ESC|Lock| Lock computer |
+|RAISE |1|SAFARI_OPEN| Open Safari browser |
+|RAISE |2|EDGE_OPEN| Open Edge browser |
+|RAISE |3|BRAVE_OPEN| Open Brave browser |
+|RAISE |4|FIREFOX_OPEN| Open Firefox browser |
+|RAISE |9|K9S_OPEN| Open K9S |
+|RAISE |VOLUME|QK_BOOT| Reset Raspberry firmware |
+|RAISE |T|TERRAFORM_TYPE| Type ´Terraform plan´ |
+|RAISE |O|KC_MPRV| Music Control Previous Song |
+|RAISE |P|KC_MPLY| Music Control Play Song |
+|RAISE |Backspace|KC_MNXT| Music Control Next Song |
+|RAISE |A|AWS_SSO|Type ´aws sso login´ |
+|RAISE |G|GIT_TYPE|Type ´git commit --amend´ |
+|RAISE |B|BRAVE_OPEN| Open Brave browser |
+|RAISE |F|FIREFOX_OPEN| Open Firefox browser |
+|RAISE |K|KUBECTL_TYPE|Type ´kubectl ´ | 
+|RAISE |C|K8SCNTX_TYPE|Type ´kubectl config use-context site-´ |
+|RAISE |V|VIM_TYPE|Type ´vim ´ |
+|RAISE |M|SPOTIFY_OPEN| Open Spotify|
+
 
 ### Adding a Custom OLED Logo / Bitmap
 

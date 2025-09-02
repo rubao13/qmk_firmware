@@ -30,6 +30,7 @@ enum custom_keycodes {
     LOGO_THEOFFICE,
     LOGO_LUNCH,
     LOGO_TOMORROWLAND,
+    LOGO_DJ,
     BRAVE_OPEN,
     ZOOM_OPEN,
     NOTES_OPEN,
@@ -40,7 +41,16 @@ enum custom_keycodes {
     CALCULATOR_OPEN,
     MONITOR_OPEN,
     AWS_SSO,
-    TERMINAL_OPEN
+    TERMINAL_OPEN,
+    SPOTIFY_OPEN,
+    VIM_TYPE,
+    KUBECTL_TYPE,
+    K8SCNTX_TYPE,
+    TERRAFORM_TYPE,
+    K9S_OPEN,
+    GIT_TYPE,
+    EDGE_OPEN,
+    CODE_OPEN
 };
 
 // Variable to track current logo
@@ -55,64 +65,64 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
      * │ESC│ 1 │ 2 │ 3 │ 4 │ 5 │   │ 6 │ 7 │ 8 │ 9 │ 0 │MUT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P |BSP│
+     * │TAB│ Q │ J │ E │ R │ T │   │ W │ U │ I │ O │ P |BSP│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CTL│ A │ S │ D │ G │ F │   │ H │ J │ K │ L │ ` │ENT│
+     * │CTL│ A │ S │ D │ G │ B │   │ F │ Y │ K │ L │ ` │ENT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ Z │ X │ C │ V │ B │   │ N │ M │ / │ ' │ ; │SFT│
+     * │SFT│L1 │ Z │ X │ C │ V │   │ N │ M │ / │ ' │ L2│SFT│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│ L1│ = │OPT│  MCL  │SPC│   |   │ , │ . │ L2│ - │
+     * │Mac│ ; │ = │OPT│  MCL  │SPC│   |   │ - │ , │ H │ . │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_QWERTY] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4, KC_5,           KC_6,   KC_7, KC_8,    KC_9,    KC_0, KC_KB_MUTE,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
-        KC_LCTL,   KC_A,    KC_S,    KC_D,   KC_G, KC_F,           KC_H,   KC_J, KC_K,    KC_L,    KC_GRV, KC_ENT,
-        KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V, KC_B,           KC_N,   KC_M, KC_SLSH, KC_QUOT,  KC_SCLN, KC_RSFT,
-        KC_LGUI, MO(1), KC_EQL, KC_LOPT, KC_MCTL ,          KC_SPC      ,  KC_PIPE, KC_COMM,  KC_DOT,   MO(2), KC_MINS
+        KC_TAB,  KC_Q,    KC_J,    KC_E,    KC_R, KC_T,           KC_W,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
+        KC_LCTL,   KC_A,    KC_S,    KC_D,   KC_G, KC_B,           KC_F,   KC_Y, KC_K,    KC_L,    KC_GRV, KC_ENT,
+        KC_LSFT,   MO(1),    KC_Z,    KC_X,    KC_C, KC_V,           KC_N,   KC_M, KC_SLSH, KC_QUOT,  MO(2), KC_RSFT,
+        KC_LGUI, KC_SCLN, KC_EQL, KC_LOPT, KC_MCTL ,          KC_SPC      ,  KC_PIPE, KC_MINS,  KC_COMM,   KC_H, KC_DOT
         ),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │PAD│BDO│BUP│VPN│CAL│CPU│   │ZOO│F8 │F9 │ { │ } │F12│
+     * │PAD│BDO│BUP│VPN│CAL│CPU│   │ZOM│VSC│F9 │ { │ } │F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SAF│   │   │   │RIO│TER│   │   │   │   │ [ │ ] │DEL│
+     * │ | │   │   │   │RIO│TER│   │   │   │   │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CAP│AWS│   │   │   │FRX│   │   │   │   │   │   │ = │
+     * │CAP│   │   │   │   │   │   │ F │   │   │   │   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│   │   │   │   │BRA│   │NOT│MCT│ \ │   │UP │ + │
+     * │SFT│L1D│   │   │   │   │   │NOT│MCT│ \ │   │UP │SFT│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│L1D│   │LUN│ LION │LOGOS│  \   │CEL│LEF│DOW│RIG│
+     * │Mac│   │   │LUN│ LION │LOGOS│  Mac │CEL│LEF│DOW│RIG│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
-    KC_LPAD, KC_BRID,   KC_BRIU,   WIREVPN_OPEN,   CALCULATOR_OPEN,   MONITOR_OPEN,         ZOOM_OPEN,   KC_F8,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
-    SAFARI_OPEN, KC_NO,  KC_NO,  KC_NO,   KC_NO,   TERMINAL_OPEN,         KC_NO,   KC_NO,   KC_NO,   KC_LBRC,  KC_RBRC, KC_DEL,
-    KC_CAPS, AWS_SSO, KC_NO, KC_NO, KC_NO, FIREFOX_OPEN,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_EQL,
-    KC_LSFT, KC_NO, KC_NO,   KC_NO, KC_NO,  BRAVE_OPEN,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_PLUS,
-        KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      KC_BSLS,   LOGO_CELUS,   KC_LEFT,    KC_DOWN,   KC_RIGHT
+    KC_LPAD, KC_BRID,   KC_BRIU,   WIREVPN_OPEN,   CALCULATOR_OPEN,   MONITOR_OPEN,         ZOOM_OPEN,   CODE_OPEN,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
+    KC_PIPE, KC_NO,  KC_NO,  KC_NO,   KC_NO,   TERMINAL_OPEN,         KC_NO,   KC_NO,   KC_NO,   KC_LBRC,  KC_RBRC, KC_DEL,
+    KC_CAPS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,       KC_F, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    KC_LSFT, KC_NO, KC_NO,   KC_NO, KC_NO,  KC_NO,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_RSFT,
+        KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      KC_RGUI,   LOGO_CELUS,   KC_LEFT,    KC_DOWN,   KC_RIGHT
         ),
     /*
      * _RAISE
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │LOK│ 1 │ 2 │ 3 │   │   │   │   │   │PRV│PLY│NXT│FIR│
+     * │LOK│SAF│EDG│BRV│FRX│   │   │   │   │   │K9S│   │FIR│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │ 4 │ 5 │ 6 │   │   │   │   │   │   │ { │ } │   │
+     * │   │   │   │   │   │TFP│   │   │   │   │PRV│PLY│NXT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │ 7 │ 8 │ 9 │   │VOL+│ │VOL-│ ( │ ) │   │   │ = │
+     * │   │AWS│   │   │GIT│BRV│   │FRX│   │K8S│   │UP │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ . │ 0 │   │   │   │   │   │   │   │   │   │SFT│
+     * │SFT│ . │ 0 │   │KCX│VIM│   │   │SPO│   │LEF│L2D│RIG│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│ * │ + │ - │   /   │ENT│       │PGU│PGD│L2D│   │
+     * │Mac│ * │ + │ - │   /   │ENT│   \   │   │   │DOW│   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
   [_RAISE] = LAYOUT(
-        MATTERMOST_OPEN, KC_1, KC_2, KC_3,  KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_MPRV,   KC_MPLY,   KC_MNXT,   QK_BOOT,
-        KC_NO, KC_4,  KC_5,  KC_6,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_LCBR,   KC_RCBR,   KC_NO,
-        KC_NO, KC_7,  KC_8,  KC_9,   KC_NO,  KC_VOLD,        KC_VOLU, KC_LPRN, KC_RPRN, KC_NO, KC_SCLN, KC_EQL,
-        KC_LSFT, KC_DOT,  KC_0,  KC_NO,   KC_NO,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO ,   KC_RSFT,
-        KC_LGUI, KC_PAST, KC_PLUS,  KC_MINS,    KC_SLSH,       KC_ENT,     KC_NO,    KC_PGUP,   KC_PGDN,   KC_NO,   KC_NO
+        MATTERMOST_OPEN, SAFARI_OPEN, EDGE_OPEN, BRAVE_OPEN,  FIREFOX_OPEN,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   K9S_OPEN,   KC_NO,   QK_BOOT,
+        KC_NO, KC_NO,  KC_NO,  KC_NO,   KC_NO,  TERRAFORM_TYPE,          KC_NO,   KC_NO,   KC_NO,    KC_MPRV,   KC_MPLY,   KC_MNXT,
+        KC_NO, AWS_SSO,  KC_NO,  KC_NO,   GIT_TYPE,  BRAVE_OPEN,        FIREFOX_OPEN, KC_NO, KUBECTL_TYPE,  KC_NO, KC_UP, KC_NO,
+        KC_LSFT, KC_DOT,  KC_0,  KC_NO,   K8SCNTX_TYPE,  VIM_TYPE,          KC_NO,   SPOTIFY_OPEN,   KC_NO,   KC_LEFT,  KC_NO ,   KC_RIGHT,
+        KC_LGUI, KC_PAST, KC_PLUS,  KC_MINS,    KC_SLSH,       KC_ENT,     KC_BSLS, KC_NO,   KC_NO,   KC_DOWN,   KC_NO
         ),
     /*
      * This layer is not used currently
@@ -151,7 +161,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LOGO_SWITCH:
             if (record->event.pressed) {
-                current_logo = (current_logo + 1) % 8; // Cycle through 0..7
+                current_logo = (current_logo + 1) % 9; // Cycle through 0..7
             }
             break;
         case LOGO_LION:
@@ -192,6 +202,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LOGO_TOMORROWLAND:
             if (record->event.pressed) {
                 current_logo = 0;
+            }
+            break;
+        case LOGO_DJ:
+            if (record->event.pressed) {
+                current_logo = 8;
             }
             break;
         case BRAVE_OPEN:
@@ -244,13 +259,57 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 open_using_spotlight("Terminal");
             }
             return false;
+        case SPOTIFY_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Spotify");
+            }
+            return false;
         case AWS_SSO:
             if (record->event.pressed) {
-                // Fixed smart quotes. Optionally append Enter: SS_TAP(X_ENTER)
                 SEND_STRING("aws sso login" SS_TAP(X_ENTER));
             }
             return false;
-    }
+        case VIM_TYPE:
+            if (record->event.pressed) {
+               SEND_STRING("vim ");
+            }
+            return false;
+        case KUBECTL_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING("kubectl ");
+            }
+            return false;
+        case K8SCNTX_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING("kubectl config use-context site-");
+            }
+            return false;
+        case TERRAFORM_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING("terraform plan ");
+            }
+            return false;
+        case K9S_OPEN:
+            if (record->event.pressed) {
+                SEND_STRING("k9s" SS_TAP(X_ENTER));
+            }
+            return false;
+        case GIT_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING("git commit --amend");
+            }
+            return false;
+        case EDGE_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Microsoft Edge");
+            }
+            return false;
+        case CODE_OPEN:
+            if (record->event.pressed) {
+                open_using_spotlight("Code");
+            }
+            return false;
+        }
     return true;
 }
 
@@ -275,6 +334,7 @@ bool oled_task_user(void) {
             case 5: render_rio(); break;
             case 6: render_lunch(); break;
             case 7: render_theoffice(); break;
+            case 8: render_dj(); break;
             default: render_tomorrowland(); break;
         }
     } else {
