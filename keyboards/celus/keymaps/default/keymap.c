@@ -50,7 +50,8 @@ enum custom_keycodes {
     K9S_OPEN,
     GIT_TYPE,
     EDGE_OPEN,
-    CODE_OPEN
+    CODE_OPEN,
+    VIM_WQ_TYPE
 };
 
 // Variable to track current logo
@@ -67,62 +68,62 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │TAB│ Q │ J │ E │ R │ T │   │ W │ U │ I │ O │ P |BSP│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │CTL│ A │ S │ D │ G │ B │   │ F │ Y │ K │ L │ ` │ENT│
+     * │CTL│ A │ S │ D │ G │ N │   │ F │ H │ K │ L │ ` │ENT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│L1 │ Z │ X │ C │ V │   │ N │ M │ / │ ' │ L2│SFT│
+     * │SFT│L1 │ Z │ X │ C │ V │   │ B │ M │ / │ ' │ L2│SFT│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│ ; │ = │OPT│  MCL  │SPC│   |   │ - │ , │ H │ . │
+     * │Mac│ ; │ = │OPT│  MCL  │SPC│   |   │ - │ , │ Y │ . │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_QWERTY] = LAYOUT(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4, KC_5,           KC_6,   KC_7, KC_8,    KC_9,    KC_0, KC_KB_MUTE,
         KC_TAB,  KC_Q,    KC_J,    KC_E,    KC_R, KC_T,           KC_W,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
-        KC_LCTL,   KC_A,    KC_S,    KC_D,   KC_G, KC_B,           KC_F,   KC_Y, KC_K,    KC_L,    KC_GRV, KC_ENT,
-        KC_LSFT,   MO(1),    KC_Z,    KC_X,    KC_C, KC_V,           KC_N,   KC_M, KC_SLSH, KC_QUOT,  MO(2), KC_RSFT,
-        KC_LGUI, KC_SCLN, KC_EQL, KC_LOPT, KC_MCTL ,          KC_SPC      ,  KC_PIPE, KC_MINS,  KC_COMM,   KC_H, KC_DOT
+        KC_LCTL,   KC_A,    KC_S,    KC_D,   KC_G, KC_N,           KC_F,   KC_H, KC_K,    KC_L,    KC_GRV, KC_ENT,
+        KC_LSFT,   MO(1),    KC_Z,    KC_X,    KC_C, KC_V,           KC_B,   KC_M, KC_SLSH, KC_QUOT,  MO(2), KC_RSFT,
+        KC_LGUI, KC_SCLN, KC_EQL, KC_LOPT, KC_MCTL ,          KC_SPC      ,  KC_PIPE, KC_MINS,  KC_COMM,   KC_Y, KC_DOT
         ),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │PAD│BDO│BUP│VPN│CAL│CPU│   │ZOM│VSC│F9 │ { │ } │F12│
+     * │PAD│BDO│BUP│VPN│CAL│CPU│   │ZOM│VSC│NOT│ { │ } │F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │ | │   │   │   │RIO│TER│   │   │   │   │ [ │ ] │DEL│
+     * │ | │VWQ│   │   │RIO│TER│   │   │   │ J │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │CAP│   │   │   │   │   │   │ F │   │   │   │   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│L1D│   │   │   │   │   │NOT│MCT│ \ │   │UP │SFT│
+     * │SFT│L1D│   │   │   │ N │   │   │   │ \ │   │UP │SFT│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
      * │Mac│   │   │LUN│ LION │LOGOS│  Mac │CEL│LEF│DOW│RIG│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
-    KC_LPAD, KC_BRID,   KC_BRIU,   WIREVPN_OPEN,   CALCULATOR_OPEN,   MONITOR_OPEN,         ZOOM_OPEN,   CODE_OPEN,   KC_F9,   KC_LCBR,   KC_RCBR, KC_F12,
-    KC_PIPE, KC_NO,  KC_NO,  KC_NO,   KC_NO,   TERMINAL_OPEN,         KC_NO,   KC_NO,   KC_NO,   KC_LBRC,  KC_RBRC, KC_DEL,
+    KC_LPAD, KC_BRID,   KC_BRIU,   WIREVPN_OPEN,   CALCULATOR_OPEN,   MONITOR_OPEN,         ZOOM_OPEN,   CODE_OPEN,   NOTES_OPEN,   KC_LCBR,   KC_RCBR, KC_F12,
+    KC_PIPE, VIM_WQ_TYPE,  KC_NO,  KC_NO,   KC_NO,   TERMINAL_OPEN,         KC_NO,   KC_NO,   KC_J,   KC_LBRC,  KC_RBRC, KC_DEL,
     KC_CAPS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,       KC_F, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_LSFT, KC_NO, KC_NO,   KC_NO, KC_NO,  KC_NO,       NOTES_OPEN, KC_MCTL, KC_BSLS, KC_NO,  KC_UP, KC_RSFT,
+    KC_LSFT, KC_NO, KC_NO,   KC_NO, KC_NO,  KC_N,       KC_NO, KC_NO, KC_BSLS, KC_NO,  KC_UP, KC_RSFT,
         KC_LGUI, KC_NO, KC_NO, LOGO_LUNCH  ,LOGO_LION , LOGO_SWITCH,      KC_RGUI,   LOGO_CELUS,   KC_LEFT,    KC_DOWN,   KC_RIGHT
         ),
     /*
      * _RAISE
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │LOK│SAF│EDG│BRV│FRX│   │   │   │   │   │K9S│   │FIR│
+     * │LOK│SAF│EDG│BRV│FRX│   │   │   │   │   │K9S│MUT│FIR│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │   │TFP│   │   │   │   │PRV│PLY│NXT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │AWS│   │   │GIT│BRV│   │FRX│   │K8S│   │UP │   │
+     * │   │AWS│SPO│   │GIT│   │   │FRX│   │K8S│   │UP │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ . │ 0 │   │KCX│VIM│   │   │SPO│   │LEF│L2D│RIG│
+     * │SFT│   │   │   │KCX│VIM│   │BRV│SPO│   │LEF│L2D│RIG│
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│ * │ + │ - │   /   │ENT│   \   │   │   │DOW│   │
+     * │Mac│   │VO+│VO-│       │ENT│   \   │   │   │DOW│   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
   [_RAISE] = LAYOUT(
-        MATTERMOST_OPEN, SAFARI_OPEN, EDGE_OPEN, BRAVE_OPEN,  FIREFOX_OPEN,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   K9S_OPEN,   KC_NO,   QK_BOOT,
+        MATTERMOST_OPEN, SAFARI_OPEN, EDGE_OPEN, BRAVE_OPEN,  FIREFOX_OPEN,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   K9S_OPEN,   KC_KB_MUTE,   QK_BOOT,
         KC_NO, KC_NO,  KC_NO,  KC_NO,   KC_NO,  TERRAFORM_TYPE,          KC_NO,   KC_NO,   KC_NO,    KC_MPRV,   KC_MPLY,   KC_MNXT,
-        KC_NO, AWS_SSO,  KC_NO,  KC_NO,   GIT_TYPE,  BRAVE_OPEN,        FIREFOX_OPEN, KC_NO, KUBECTL_TYPE,  KC_NO, KC_UP, KC_NO,
-        KC_LSFT, KC_DOT,  KC_0,  KC_NO,   K8SCNTX_TYPE,  VIM_TYPE,          KC_NO,   SPOTIFY_OPEN,   KC_NO,   KC_LEFT,  KC_NO ,   KC_RIGHT,
-        KC_LGUI, KC_PAST, KC_PLUS,  KC_MINS,    KC_SLSH,       KC_ENT,     KC_BSLS, KC_NO,   KC_NO,   KC_DOWN,   KC_NO
+        KC_NO, AWS_SSO,  SPOTIFY_OPEN,  KC_NO,   GIT_TYPE,  KC_NO,        FIREFOX_OPEN, KC_NO, KUBECTL_TYPE,  KC_NO, KC_UP, KC_NO,
+        KC_LSFT, KC_NO,  KC_NO,  KC_NO,   K8SCNTX_TYPE,  VIM_TYPE,          BRAVE_OPEN,   SPOTIFY_OPEN,   KC_NO,   KC_LEFT,  KC_NO ,   KC_RIGHT,
+        KC_LGUI, KC_NO, KC_KB_VOLUME_UP,  KC_KB_VOLUME_DOWN,    KC_NO,       KC_ENT,     KC_BSLS, KC_NO,   KC_NO,   KC_DOWN,   KC_NO
         ),
     /*
      * This layer is not used currently
@@ -271,7 +272,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case VIM_TYPE:
             if (record->event.pressed) {
-               SEND_STRING("vim ");
+                SEND_STRING("vim ");
             }
             return false;
         case KUBECTL_TYPE:
@@ -309,7 +310,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 open_using_spotlight("Code");
             }
             return false;
-        }
+        case VIM_WQ_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":wq");
+            }
+            return false;
+    }
     return true;
 }
 

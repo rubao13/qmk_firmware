@@ -1,8 +1,6 @@
-# Celus
+# Celus Keyboard
 
-![Celus Keyboard](https://www.celus.io/hubfs/favicon.ico)
-
-*A custom split keyboard featuring a unique layout with 60 keys optimized for ergonomic typing.*
+*![Celus Keyboard](https://www.celus.io/hubfs/favicon.ico) Celus a custom split keyboard featuring a unique layout with 60 keys optimized for ergonomic typing.*
 
 ## Keyboard Info
 
@@ -34,11 +32,11 @@ QWERTY Layer:
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
 │TAB│ Q │ J │ E │ R │ T │   │ W │ U │ I │ O │ P |BSP│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│CTL│ A │ S │ D │ G │ B │   │ F │ Y │ K │ L │ ` │ENT│
+│CTL│ A │ S │ D │ G │ N │   │ F │ H │ K │ L │ ` │ENT│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│SFT│L1 │ Z │ X │ C │ V │   │ N │ M │ / │ ' │ L2│SFT│
+│SFT│L1 │ Z │ X │ C │ V │   │ B │ M │ / │ ' │ L2│SFT│
 ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-│Mac│ ; │ = │OPT│  MCL  │SPC│   |   │ - │ , │ H │ . │
+│Mac│ ; │ = │OPT│  MCL  │SPC│   |   │ - │ , │ Y │ . │
 └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
 ```
 
@@ -138,7 +136,7 @@ The default firmware includes four layers:
 - **Layer 3**: Adjust (RGB, audio, keyboard settings)
 
 #### Layers LOWER & RAISE Shortcuts table
-| Layer | QWERTY match |  Function |  Description |
+| Layer | QWERTY |  Function |  Description |
 |-------|--------------|-----------|--------------|
 |LOWER |ESC|KC_LPAD| Mac Lauchpad|
 |LOWER |1|KC_BRID| Lower Brigth|
@@ -148,12 +146,12 @@ The default firmware includes four layers:
 |LOWER |5|MONITOR_OPEN| Open System monitor|
 |LOWER |6|ZOOM_OPEN| Open Zoom|
 |LOWER |7|CODE_OPEN| Open VS Code|
+|LOWER |8|NOTES_OPEN| Open Notes app |
+|LOWER |Q|VIM_WQ_TYPE| Type ´:wq´|
 |LOWER |T|TERMINAL_OPEN| Terminal |
-|LOWER |N|NOTES_OPEN| Open Notes app |
-|LOWER| M | KC_MCTL| Mac Mission Control|
 
- 
-| Layer | QWERTY key |  Function |  Description |
+
+| Layer | QWERTY |  Function |  Description |
 |-------|--------------|-----------|--------------|
 |RAISE |ESC|Lock| Lock computer |
 |RAISE |1|SAFARI_OPEN| Open Safari browser |
@@ -167,13 +165,16 @@ The default firmware includes four layers:
 |RAISE |P|KC_MPLY| Music Control Play Song |
 |RAISE |Backspace|KC_MNXT| Music Control Next Song |
 |RAISE |A|AWS_SSO|Type ´aws sso login´ |
+|RAISE |S|SPOTIFY_OPEN| Open Spotify|
 |RAISE |G|GIT_TYPE|Type ´git commit --amend´ |
 |RAISE |B|BRAVE_OPEN| Open Brave browser |
 |RAISE |F|FIREFOX_OPEN| Open Firefox browser |
-|RAISE |K|KUBECTL_TYPE|Type ´kubectl ´ | 
+|RAISE |K|KUBECTL_TYPE|Type ´kubectl ´ |
 |RAISE |C|K8SCNTX_TYPE|Type ´kubectl config use-context site-´ |
 |RAISE |V|VIM_TYPE|Type ´vim ´ |
 |RAISE |M|SPOTIFY_OPEN| Open Spotify|
+|RAISE |= / + |KC_KB_VOLUME_UP| Volume UP|
+|RAISE |OPT |KC_KB_VOLUME_DOWN| Volume DOWN|
 
 
 ### Adding a Custom OLED Logo / Bitmap
