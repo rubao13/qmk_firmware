@@ -158,6 +158,7 @@ The default firmware includes four layers:
 |RAISE |2|EDGE_OPEN| Open Edge browser |
 |RAISE |3|BRAVE_OPEN| Open Brave browser |
 |RAISE |4|FIREFOX_OPEN| Open Firefox browser |
+|RAISE |5|COMET_OPEN| Open COmet browser |
 |RAISE |9|K9S_OPEN| Open K9S |
 |RAISE |VOLUME|QK_BOOT| Reset Raspberry firmware |
 |RAISE |T|TERRAFORM_TYPE| Type ´Terraform plan´ |
@@ -170,6 +171,7 @@ The default firmware includes four layers:
 |RAISE |B|BRAVE_OPEN| Open Brave browser |
 |RAISE |F|FIREFOX_OPEN| Open Firefox browser |
 |RAISE |K|KUBECTL_TYPE|Type ´kubectl ´ |
+|RAISE |L|GIT_CLONE_TYPE|Type ´git clone https://$gusr:$tok@git.celus.co ´ |
 |RAISE |C|K8SCNTX_TYPE|Type ´kubectl config use-context site-´ |
 |RAISE |V|VIM_TYPE|Type ´vim ´ |
 |RAISE |M|SPOTIFY_OPEN| Open Spotify|
