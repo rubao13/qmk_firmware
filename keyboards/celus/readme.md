@@ -32,11 +32,11 @@ QWERTY Layer:
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
 │TAB│ Q │ Y*│ E │ R │ T │   │ W │ U │ I │ O │ P |BSP│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│L1 │ A │ S │ D │ F │ '*│   │ H │ J*│ K │ L │ ` │ L2│
+│ ; │ A │ S │ D │ F │ '*│   │ H │ J*│ K │ L │ ` │ - │
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│SFT│ ; │ Z │ X │ C │ V │   │ B │ N │ M │ G │ / │SFT│
+│SFT│ G │ Z │ X │ C │ V │   │ B │ N │ M │ / │ = │SFT│
 ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-│Mac│CTL│ = │OPT│  MCL  │SPC│ ENTER │ - │ , │ | │ . │
+│Mac│CTL│OPT│L1 │ Apps  │SPC│ ENTER │ L2│ , │ | │ . │
 └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
 ```
 
@@ -138,29 +138,32 @@ The default firmware includes four layers:
 #### Layers LOWER & RAISE Shortcuts table
 | Layer | QWERTY |  Function |  Description |
 |-------|--------------|-----------|--------------|
-|LOWER |ESC|KC_LPAD| Mac Lauchpad|
-|LOWER |1|KC_BRID| Lower Brigth|
-|LOWER |2|KC_BRIU| Raise Brigth|
+|LOWER |ESC|LOCK_SCREEN| Lock computer|
+|LOWER |1|BRAVE_OPEN| Open Brave browser |
+|LOWER |2|COMET_OPEN| Open Comet browser |
 |LOWER |3|WIREVPN_OPEN| Open Wireguard VPN app|
 |LOWER |4|CALCULATOR_OPEN| Open Calculator|
 |LOWER |5|MONITOR_OPEN| Open System monitor|
 |LOWER |6|ZOOM_OPEN| Open Zoom|
 |LOWER |7|CODE_OPEN| Open VS Code|
-|LOWER |8|NOTES_OPEN| Open Notes app |
+|LOWER |8|TXTEDIT_OPEN| Open TextEdit app |
+|LOWER |TAB| KC_MCTL | Mac Mission Control|
 |LOWER |Q|VIM_WQ_TYPE| Type ´:wq´|
 |LOWER |T|TERMINAL_OPEN| Terminal |
 
 
 | Layer | QWERTY |  Function |  Description |
 |-------|--------------|-----------|--------------|
-|RAISE |ESC|Lock| Lock computer |
+|RAISE |ESC|LOCK_SCREEN| Lock computer |
 |RAISE |1|SAFARI_OPEN| Open Safari browser |
-|RAISE |2|EDGE_OPEN| Open Edge browser |
+|RAISE |2|COMET_OPEN| Open Comet browser  |
 |RAISE |3|BRAVE_OPEN| Open Brave browser |
 |RAISE |4|FIREFOX_OPEN| Open Firefox browser |
-|RAISE |5|COMET_OPEN| Open COmet browser |
+|RAISE |5|EDGE_OPEN| Open Edge browser |
+|RAISE |8|PASSW_GEN_TYPE| Generates 23 char passwords|
 |RAISE |9|K9S_OPEN| Open K9S |
 |RAISE |VOLUME|QK_BOOT| Reset Raspberry firmware |
+|RAISE |TAB| APPLE_AI | Apple Intelligence|
 |RAISE |T|TERRAFORM_TYPE| Type ´Terraform plan´ |
 |RAISE |O|KC_MPRV| Music Control Previous Song |
 |RAISE |P|KC_MPLY| Music Control Play Song |

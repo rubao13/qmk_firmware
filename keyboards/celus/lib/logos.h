@@ -11,3 +11,4 @@ void render_theoffice(void);
 void render_lower(void);
 void render_raise(void);
 void render_dj(void);
+void render_passwgen(void);
