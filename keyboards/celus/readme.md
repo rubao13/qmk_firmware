@@ -30,13 +30,13 @@ QWERTY Layer:
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
 │ESC│ 1 │ 2 │ 3 │ 4 │ 5 │   │ 6 │ 7 │ 8 │ 9 │ 0 │MUT│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│TAB│ Q │ Y*│ E │ R │ T │   │ W │ U │ I │ O │ P |BSP│
+│TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P |BSP│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│ ; │ A │ S │ D │ F │ '*│   │ H │ J*│ K │ L │ ` │ - │
+│ ; │ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ ` │ - │
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│SFT│ G │ Z │ X │ C │ V │   │ B │ N │ M │ / │ = │SFT│
+│SFT│ ' │ Z │ X │ C │ V │   │ B │ N │ M │ / │ ↑ │SFT│
 ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-│Mac│CTL│OPT│L1 │ Apps  │SPC│ ENTER │ L2│ , │ | │ . │
+│Mac│CTL│OPT│L1 │ Apps  │SPC│ ENTER │ L2│ ← │ ↓ │ → │
 └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
 ```
 
@@ -150,6 +150,8 @@ The default firmware includes four layers:
 |LOWER |TAB| KC_MCTL | Mac Mission Control|
 |LOWER |Q|VIM_WQ_TYPE| Type ´:wq´|
 |LOWER |T|TERMINAL_OPEN| Terminal |
+|LOWER |G|GIT_TYPE|Type ´git commit --amend´ 
+|LOWER |C|LOCK_SCREEN| Lock computer|
 
 
 | Layer | QWERTY |  Function |  Description |
@@ -170,13 +172,13 @@ The default firmware includes four layers:
 |RAISE |Backspace|KC_MNXT| Music Control Next Song |
 |RAISE |A|AWS_SSO|Type ´aws sso login´ |
 |RAISE |S|SPOTIFY_OPEN| Open Spotify|
-|RAISE |G|GIT_TYPE|Type ´git commit --amend´ |
-|RAISE |B|BRAVE_OPEN| Open Brave browser |
 |RAISE |F|FIREFOX_OPEN| Open Firefox browser |
+|RAISE |G|GIT_CLONE_TYPE|Type ´git clone https://$gusr:$tok@git.celus.co ´ |
 |RAISE |K|KUBECTL_TYPE|Type ´kubectl ´ |
-|RAISE |L|GIT_CLONE_TYPE|Type ´git clone https://$gusr:$tok@git.celus.co ´ |
+|RAISE |L|LOCK_SCREEN| Lock computer |
 |RAISE |C|K8SCNTX_TYPE|Type ´kubectl config use-context site-´ |
 |RAISE |V|VIM_TYPE|Type ´vim ´ |
+|RAISE |B|BRAVE_OPEN| Open Brave browser |
 |RAISE |M|SPOTIFY_OPEN| Open Spotify|
 |RAISE |= / + |KC_KB_VOLUME_UP| Volume UP|
 |RAISE |OPT |KC_KB_VOLUME_DOWN| Volume DOWN|
