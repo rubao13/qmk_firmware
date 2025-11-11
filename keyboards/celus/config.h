@@ -9,8 +9,4 @@
 #define I2C1_SCL_PIN GP17
 #define OLED_DISPLAY_128X64
 
-#define ENCODERS_PAD_A { GP26 }
-#define ENCODERS_PAD_B { GP27 }
-#define ENCODER_RESOLUTION 4
-
 #define TAP_CODE_DELAY 10
