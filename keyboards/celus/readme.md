@@ -78,7 +78,18 @@ qmk compile -kb celus -km default
 
 ### Building and Flashing
 
-#### Compile Firmware
+### Automated Builds
+
+The Celus keyboard firmware is automatically built using GitHub Actions whenever changes are pushed to the repository. Tagged releases (e.g., `v1.0.0`) trigger automated builds that generate firmware artifacts (`.hex`, `.bin`, `.uf2` files) ready for flashing.
+
+#### Downloading Pre-built Firmware
+
+1. Navigate to the [Actions tab](https://github.com/rubao13/qmk_firmware/actions) in the repository
+2. Select the latest successful build
+3. Download the firmware artifact for your keyboard
+4. Extract and flash the `.uf2` file to your keyboard
+
+#### Local Firmware Build
 
 ```bash
 # Navigate to QMK directory
