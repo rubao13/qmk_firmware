@@ -1,0 +1,67 @@
+name: Build and Publish QMK firmware
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  build:
+    container: ghcr.io/qmk/qmk_cli:latest
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      ARTIFACT_NAME_FILE: artifact_name.txt
+    steps:
+    - name: Disable git safe directory checks
+      run : git config --global --add safe.directory '*'
+
+    - name: Checkout QMK firmware
+      uses: actions/checkout@v5
+      with:
+        repository: qmk/qmk_firmware
+        ref: 0.30.8
+        submodules: recursive
+
+    - name: Checkout QMK keyboard
+      uses: actions/checkout@v5
+      with:
+        path: "custom-keyboard"
+        sparse-checkout: "keyboards/${{ vars.KEYBOARD_NAME }}"
+        sparse-checkout-cone-mode: false
+
+    - name: Copy custom keyboard into QMK firmware
+      run: |
+        cp -r custom-keyboard/keyboards/${{ vars.KEYBOARD_NAME }} keyboards/
+        rm -rf custom-keyboard
+
+    - name: QMK setup
+      run: |
+        qmk setup
+
+    # Uses repository variable KEYBOARD_NAME to build different keyboards
+    - name: Build firmware
+      run: qmk compile -j0 -kb ${{ vars.KEYBOARD_NAME }} -km default
+
+    - name: Generate artifact name
+      run: |
+        SAFE_VERSION=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9_-]/-/g')
+        echo "ARTIFACT_NAME=${{ vars.KEYBOARD_NAME }}-default-$SAFE_VERSION" >> $GITHUB_ENV
+
+    - name: Archive firmware build
+      uses: actions/upload-artifact@v5
+      continue-on-error: true
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: |
+          *.hex
+          *.bin
+          *.uf2
+        overwrite: true
