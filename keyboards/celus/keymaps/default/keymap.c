@@ -5,6 +5,7 @@
 #include QMK_KEYBOARD_H
 #include "lib/logos.h"
 #include "lib/wpm.h"
+#include "secrets.h"
 // Standard headers for types used in some IDE linters
 #include <stdint.h>
 #include <stdbool.h>
@@ -18,6 +19,15 @@ enum layer_number {
     _RAISE,
     _ADJUST,
 };
+
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [_QWERTY] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
+    [_LOWER]  = { ENCODER_CCW_CW(KC_BRIGHTNESS_UP, KC_BRIGHTNESS_DOWN)  },
+    [_RAISE]  = { ENCODER_CCW_CW(KC_DOWN, KC_UP)  },
+    [_ADJUST] = { ENCODER_CCW_CW(KC_NO, KC_NO) },
+};
+#endif
 
 // Custom keycodes for logo switching functions in logos.h file
 enum custom_keycodes {
@@ -58,6 +68,16 @@ enum custom_keycodes {
     LOCK_SCREEN,
     APPLE_AI,
     CMD_TAB,
+    BITWARDEN_UNLOCK,
+    CMD_Q,
+    SCREENSHOT,
+    K9S_CTX_TYPE,
+    K9S_NS_TYPE,
+    CMD_SAVE,
+    TYPE_EMAIL_WORK,
+    TYPE_EMAIL_GMAIL,
+    TYPE_EMAIL_DEUTSCH,
+    CMD_V,
 };
 
 // Variable to track current logo
@@ -74,63 +94,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │TAB│ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P |BSP│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │ ; │ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ ` │ - │
+     * │ ; │ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ , │ . │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│ ' │ Z │ X │ C │ V │   │ B │ N │ M │ / │ ↑ │SFT│
-     * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│CTL│OPT│L1 │Mac+Tab│SPC│ ENTER │ L2│ ← │ ↓ │ → │
-     * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
-     *  ' andd Y and J have been swapped to optimize faildure key positions
+     * │SFT│ ' │ Z │ X │ C │ V │   │ B │ N │ M │ ` │ ↑ │ - │
+     * ├───┼───┼───┼───┼───┴───┼───┴───┴───┼───┼───┼───┼───┤
+     * │ / │CTL│OPT│L1 │  Mac  │   SPACE   │ L2│ ← │ ↓ │ → │
+     * └───┴───┴───┴───┴───────┴───────┴───┴───┴───┴───┴───┘
      */
   [_QWERTY] = LAYOUT(
-        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4, KC_5,           KC_6,   KC_7, KC_8,    KC_9,    KC_0, KC_KB_MUTE,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T,           KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
-        KC_SCLN, KC_A,    KC_S,    KC_D,   KC_F, KC_G,           KC_H,   KC_J, KC_K,    KC_L,    KC_GRV,  KC_MINS,
-        KC_LSFT,   KC_QUOT,     KC_Z,    KC_X,    KC_C, KC_V,           KC_B,   KC_N, KC_M, KC_SLSH,  KC_UP, KC_RSFT,
-        KC_LGUI, KC_LCTL, KC_LOPT, MO(1), CMD_TAB,          KC_SPC      ,  KC_ENT, MO(2),  KC_LEFT,   KC_DOWN, KC_RIGHT
+        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4, KC_5, /* SPACE */ KC_6,   KC_7, KC_8,    KC_9,    KC_0, KC_KB_MUTE,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T, /* SPACE */ KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
+        KC_SCLN, KC_A,    KC_S,    KC_D,    KC_F, KC_G, /* SPACE */ KC_H,   KC_J, KC_K,    KC_L,    KC_COMM,  KC_DOT,
+        KC_LSFT,   KC_QUOT, KC_Z,  KC_X,    KC_C, KC_V, /* SPACE */ KC_B,   KC_N, KC_M, KC_GRV,  KC_UP, KC_MINS,
+        KC_SLSH, KC_LCTL, KC_LOPT, MO(1),     KC_LGUI,    KC_SPC,   KC_SPC, MO(2),  KC_LEFT,   KC_DOWN, KC_RIGHT
         ),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │LOK│BRV│CMT│VPN│CAL│CPU│   │ZOM│VSC│TXT│ { │ } │F12│
+     * │LOK│CEL│EMC│EMG│EMD│SHT│   │ZOM│VSC│TXT│ { │ } │F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │MCL│VWQ│   │   │RIO│TER│   │   │   │ J │ [ │ ] │DEL│
+     * │MCL│VWQ│   │   │RIO│KXT│   │   │   │   │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │   │   │   │   │   │   │   │   │   │
+     * │   │   │SAV│   │   │GIT│   │   │   │   │LIO│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│GIT│   │   │LOK│   │   │   │   │   │ \ │ = │SFT│
+     * │SFT│   │MTb│CQT│LOK│PST│   │BUL│KNS│   │   │DEL│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│CAP│LUN│L1D│ LION │LOGOS│CELUS │   │ , │ | │ . │
+     * │ \ │CAP│LUN|L1D│  Mac │LOGOS│ENTER │   │   │ | │   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
-    LOCK_SCREEN, BRAVE_OPEN, COMET_OPEN, WIREVPN_OPEN, CALCULATOR_OPEN, MONITOR_OPEN,         ZOOM_OPEN,   CODE_OPEN,   TXTEDIT_OPEN,   KC_LCBR,   KC_RCBR, KC_F12,
-    KC_MCTL, VIM_WQ_TYPE,  KC_NO,  KC_NO,   LOGO_RIO,   TERMINAL_OPEN,         KC_NO,   KC_NO,   KC_J,   KC_LBRC,  KC_RBRC, KC_DEL,
-    KC_NO, KC_NO, KC_Y, KC_NO, KC_NO, GIT_TYPE,                                   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_LSFT, KC_NO, KC_NO,   KC_NO, LOCK_SCREEN,  KC_NO,                    KC_NO, KC_NO, KC_NO, KC_BSLS,  KC_EQL, KC_RSFT,
-        KC_LGUI, KC_CAPS, LOGO_LUNCH, KC_NO, LOGO_LION , LOGO_SWITCH,      LOGO_CELUS,   KC_NO,   KC_COMM,    KC_PIPE,   KC_DOT
+    LOCK_SCREEN, LOGO_CELUS, TYPE_EMAIL_WORK, TYPE_EMAIL_GMAIL, TYPE_EMAIL_DEUTSCH, SCREENSHOT, /* SPACE */ ZOOM_OPEN,   CODE_OPEN,   TXTEDIT_OPEN,   KC_LCBR,   KC_RCBR, KC_F12,
+    
+    KC_MCTL, VIM_WQ_TYPE, KC_NO,  KC_NO, LOGO_RIO, K9S_CTX_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,   KC_LBRC,  KC_RBRC, KC_DEL,
+    
+    KC_NO, AWS_SSO, CMD_SAVE, KC_NO, KC_NO, GIT_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, LOGO_LION, KC_NO, KC_NO,
+    
+    KC_LSFT, KC_NO, CMD_TAB, CMD_Q, LOCK_SCREEN, CMD_V, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, LOGO_LUNCH, KC_NO,  KC_DEL, KC_EQL,
+    
+    KC_BSLS, KC_CAPS,LOGO_LUNCH, KC_NO,KC_LGUI , LOGO_SWITCH,KC_ENT,   KC_NO,   KC_NO,    KC_PIPE,   KC_NO
         ),
     /*
      * _RAISE
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
      * │LOK│SAF│CMT│BRV│FRX│EDG│   │   │   │PWD│K9S│SPO│FIR│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │AAI│   │   │   │   │TFP│   │   │   │ Y │PRV│PLY│NXT│
+     * │AAI│   │   │   │   │TFP│   │   │   │   │PRV│PLY│NXT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │AWS│SPO│   │   │   │   │   │FRX│   │K8S│LOK│   │   │
+     * │   │AWS│SPO│   │   │GCL│   │FRX│   │K8S│LOK│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│GTC│   │   │KCX│   │   │   │   │   │ \ │ = │SFT│
+     * │SFT│   │   │   │KCX│VIM│   │BUL│   │   │   │DEL│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │Mac│   │VO+│VO-│ SPOT │LOGOS│ ENTER│L2D│ , │ | │ . │
+     * │   │   │OPT│   │  Mac │LOGOS│ ENTER│L2D│   │ | │   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
   [_RAISE] = LAYOUT(
-        LOCK_SCREEN, SAFARI_OPEN, COMET_OPEN, BRAVE_OPEN,  FIREFOX_OPEN,  EDGE_OPEN,          KC_NO,   KC_NO,   PASSW_GEN_TYPE,   K9S_OPEN,   SPOTIFY_OPEN,   QK_BOOT,
-        APPLE_AI, KC_NO,  KC_NO,  VIM_TYPE,   KC_NO,  TERRAFORM_TYPE,          KC_Y,   KC_NO,   KC_Y,    KC_MPRV,   KC_MPLY,   KC_MNXT,
-        KC_NO,  AWS_SSO,  SPOTIFY_OPEN, KC_NO,   KC_NO,  GIT_CLONE_TYPE,        FIREFOX_OPEN, KC_NO, KUBECTL_TYPE,  LOCK_SCREEN, KC_NO, KC_NO,
-        KC_LSFT, KC_NO,  KC_NO,  KC_NO,   K8SCNTX_TYPE,  KC_NO,          KC_NO,   KC_NO,   KC_NO,   KC_BSLS,  KC_EQL ,   KC_RSFT,
-        KC_LGUI, KC_NO, KC_KB_VOLUME_UP,  KC_KB_VOLUME_DOWN,    SPOTIFY_OPEN,       LOGO_SWITCH, KC_ENT, KC_NO,   KC_COMM,    KC_PIPE,   KC_DOT
+        LOCK_SCREEN, SAFARI_OPEN, COMET_OPEN, BRAVE_OPEN,  FIREFOX_OPEN,  EDGE_OPEN, /* SPACE */ KC_NO,   KC_NO,   PASSW_GEN_TYPE,   K9S_OPEN,   SPOTIFY_OPEN,   QK_BOOT,
+        
+        APPLE_AI, KC_NO, KC_NO, KC_NO, KC_NO, TERRAFORM_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,    KC_MPRV,   KC_MPLY,   KC_MNXT,
+        
+        KC_NO,  AWS_SSO, SPOTIFY_OPEN, KC_NO, KC_NO,GIT_CLONE_TYPE, /* SPACE */ FIREFOX_OPEN, KC_NO, KUBECTL_TYPE,  LOCK_SCREEN, KC_NO, KC_NO,
+        
+        KC_LSFT, KC_NO, KC_NO,  KC_NO, K8SCNTX_TYPE, VIM_TYPE, /* SPACE */ BITWARDEN_UNLOCK,   KC_NO,   KC_NO,   KC_NO,  KC_DEL ,   KC_EQL,
+        
+        KC_NO, KC_NO, KC_LOPT,  KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO,   KC_NO,    KC_PIPE,   KC_NO
         ),
     /*
      * This layer is not used currently
@@ -155,15 +182,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO, KC_NO
     )
 };
-
-#if defined(ENCODER_MAP_ENABLE)
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_QWERTY] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
-    [_LOWER]  = { ENCODER_CCW_CW(KC_BRIGHTNESS_UP, KC_BRIGHTNESS_DOWN)  },
-    [_RAISE]  = { ENCODER_CCW_CW(KC_DOWN, KC_UP)  },
-    [_ADJUST] = { ENCODER_CCW_CW(KC_NO, KC_NO) },
-};
-#endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -342,7 +360,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // Open Apple Intelligence (macOS) using Command double tap
         case APPLE_AI:
             if (record->event.pressed) {
-                SEND_STRING(SS_LGUI(SS_LGUI()));
+                tap_code(KC_LGUI);
+                wait_ms(75); // brief pause so macOS registers the double tap
+                tap_code(KC_LGUI);
             }
             return false;
             // Random password generator makes random 23 characters
@@ -369,6 +389,59 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 register_code(KC_LGUI);
                 tap_code(KC_TAB);
                 unregister_code(KC_LGUI);
+            }
+            return false;
+        // in the browser bitwarden shortcut to unlock is Cmd+Shift+L
+        case BITWARDEN_UNLOCK:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI(SS_LSFT("l")));
+            }
+            return false;
+        // Cmd+Q to quit apps on macOS
+        case CMD_Q:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("q"));
+            }
+            return false;
+        // Screenshot on macOS Cmd+Shift+5
+        case SCREENSHOT:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI(SS_LSFT("5")));
+            }
+            return false;
+        case K9S_CTX_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":ctx");
+            }
+            return false;
+        case K9S_NS_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":ns");
+            }
+            return false;
+        case CMD_SAVE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("s"));
+            }
+            return false;
+        case TYPE_EMAIL_WORK:
+            if (record->event.pressed) {
+                SEND_STRING(EMAIL_WORK);
+            }
+            return false;
+        case TYPE_EMAIL_GMAIL:
+            if (record->event.pressed) {
+                SEND_STRING(EMAIL_GMAIL);
+            }
+            return false;
+        case TYPE_EMAIL_DEUTSCH:
+            if (record->event.pressed) {
+                SEND_STRING(EMAIL_DEUTSCH);
+            }
+            return false;
+        case CMD_V:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("v"));
             }
             return false;
     }
