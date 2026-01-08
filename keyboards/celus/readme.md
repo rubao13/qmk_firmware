@@ -160,12 +160,13 @@ The default firmware includes four layers:
 |LOWER |8|TXTEDIT_OPEN| Open TextEdit app |
 |LOWER |TAB| KC_MCTL | Mac Mission Control|
 |LOWER |Q|VIM_WQ_TYPE| Type ´:wq´|
-|LOWER |T|TERMINAL_OPEN| Terminal |
+|LOWER |T|K9S_CTX_TYPE| Type ´:ctx´ |
 |LOWER |G|GIT_TYPE|Type ´git commit --amend´ |
 |LOWER |Z|CMD_TAB| CMD + TAB go previous app|
 |LOWER |X|CMD_Q| Close app |
 |LOWER |C|LOCK_SCREEN| Lock computer|
 |LOWER |B|BITWARDEN_UNLOCK| Bitwarden unlock shortcut|
+|LOWER |N|K9S_NS_TYPE| Type ´:ns´|
 
 | Layer | QWERTY |  Function |  Description |
 |-------|--------------|-----------|--------------|
@@ -179,7 +180,7 @@ The default firmware includes four layers:
 |RAISE |9|K9S_OPEN| Open K9S |
 |RAISE |VOLUME|QK_BOOT| Reset Raspberry firmware |
 |RAISE |TAB| APPLE_AI | Apple Intelligence|
-|RAISE |T|TERRAFORM_TYPE| Type ´Terraform plan´ |
+|RAISE |T|K9S_CTX_TYPE| Type ´:ctx´ |
 |RAISE |O|KC_MPRV| Music Control Previous Song |
 |RAISE |P|KC_MPLY| Music Control Play Song |
 |RAISE |Backspace|KC_MNXT| Music Control Next Song |
@@ -192,6 +193,7 @@ The default firmware includes four layers:
 |RAISE |C|K8SCNTX_TYPE|Type ´kubectl config use-context site-´ |
 |RAISE |V|VIM_TYPE|Type ´vim ´ |
 |RAISE |B|BITWARDEN_UNLOCK| Bitwarden unlock shortcut|
+|RAISE |N|K9S_NS_TYPE| Type ´:ns´|
 
 ### Custom Macro Reference
 
