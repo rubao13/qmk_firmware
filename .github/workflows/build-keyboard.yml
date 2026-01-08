@@ -12,7 +12,27 @@ concurrency:
 
 jobs:
 
+  load-email:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create secrets.h from EMAIL_LIST
+      run: |
+        cat << 'EOF' > secrets.h
+        // This file is auto-generated from GitHub variable EMAIL_LIST
+        #pragma once
+
+        ${{ vars.EMAIL_LIST }}
+        EOF
+
+    - name: Upload secrets.h artifact
+      uses: actions/upload-artifact@v5
+      with:
+        name: secrets
+        path: secrets.h
+        retention-days: 1
+
   build:
+    needs: load-email
     container: ghcr.io/qmk/qmk_cli:latest
     runs-on: ubuntu-latest
     permissions:
@@ -41,6 +61,12 @@ jobs:
       run: |
         cp -r custom-keyboard/keyboards/${{ vars.KEYBOARD_NAME }} keyboards/
         rm -rf custom-keyboard
+
+    - name: Download secrets.h
+      uses: actions/download-artifact@v5
+      with:
+        name: secrets
+        path: keyboards/${{ vars.KEYBOARD_NAME }}/keymaps/default/
 
     - name: QMK setup
       run: |

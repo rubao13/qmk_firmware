@@ -12,6 +12,8 @@
 
 // Helper to open apps via macOS Spotlight (Cmd+Space -> type -> Enter)
 static void open_using_spotlight(const char *name);
+// Helper to save string to clipboard
+static void save_on_cliboard(const char *str);
 
 enum layer_number {
     _QWERTY = 0,
@@ -115,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │MCL│VWQ│   │   │RIO│KXT│   │   │   │   │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │   │SAV│   │   │GIT│   │   │   │   │LIO│   │   │
+     * │   │AWS│SAV│   │   │GIT│   │   │   │   │LIO│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │SFT│   │MTb│CQT│LOK│PST│   │BUL│KNS│   │   │DEL│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
@@ -129,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
     KC_NO, AWS_SSO, CMD_SAVE, KC_NO, KC_NO, GIT_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, LOGO_LION, KC_NO, KC_NO,
     
-    KC_LSFT, KC_NO, CMD_TAB, CMD_Q, LOCK_SCREEN, CMD_V, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, LOGO_LUNCH, KC_NO,  KC_DEL, KC_EQL,
+    KC_LSFT, KC_NO, CMD_TAB, CMD_Q, LOCK_SCREEN, CMD_V, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, KC_NO, KC_NO,  KC_DEL, KC_EQL,
     
     KC_BSLS, KC_CAPS,LOGO_LUNCH, KC_NO,KC_LGUI , LOGO_SWITCH,KC_ENT,   KC_NO,   KC_NO,    KC_PIPE,   KC_NO
         ),
@@ -138,11 +140,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
      * │LOK│SAF│CMT│BRV│FRX│EDG│   │   │   │PWD│K9S│SPO│FIR│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │AAI│   │   │   │   │TFP│   │   │   │   │PRV│PLY│NXT│
+     * │AAI│   │   │   │   │KXT│   │   │   │   │PRV│PLY│NXT│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │AWS│SPO│   │   │GCL│   │FRX│   │K8S│LOK│   │   │
+     * │   │AWS│SPO│   │   │GCL│   │   │   │K8S│LOK│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│   │   │   │KCX│VIM│   │BUL│   │   │   │DEL│ = │
+     * │SFT│   │   │   │KCX│VIM│   │BUL│KNS│   │   │DEL│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
      * │   │   │OPT│   │  Mac │LOGOS│ ENTER│L2D│   │ | │   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
@@ -151,11 +153,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_RAISE] = LAYOUT(
         LOCK_SCREEN, SAFARI_OPEN, COMET_OPEN, BRAVE_OPEN,  FIREFOX_OPEN,  EDGE_OPEN, /* SPACE */ KC_NO,   KC_NO,   PASSW_GEN_TYPE,   K9S_OPEN,   SPOTIFY_OPEN,   QK_BOOT,
         
-        APPLE_AI, KC_NO, KC_NO, KC_NO, KC_NO, TERRAFORM_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,    KC_MPRV,   KC_MPLY,   KC_MNXT,
+        APPLE_AI, KC_NO, KC_NO, KC_NO, KC_NO, K9S_CTX_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,    KC_MPRV,   KC_MPLY,   KC_MNXT,
         
-        KC_NO,  AWS_SSO, SPOTIFY_OPEN, KC_NO, KC_NO,GIT_CLONE_TYPE, /* SPACE */ FIREFOX_OPEN, KC_NO, KUBECTL_TYPE,  LOCK_SCREEN, KC_NO, KC_NO,
+        KC_NO,  AWS_SSO, SPOTIFY_OPEN, KC_NO, KC_NO,GIT_CLONE_TYPE, /* SPACE */ KC_NO, KC_NO, KUBECTL_TYPE,  LOCK_SCREEN, KC_NO, KC_NO,
         
-        KC_LSFT, KC_NO, KC_NO,  KC_NO, K8SCNTX_TYPE, VIM_TYPE, /* SPACE */ BITWARDEN_UNLOCK,   KC_NO,   KC_NO,   KC_NO,  KC_DEL ,   KC_EQL,
+        KC_LSFT, KC_NO, KC_NO,  KC_NO, K8SCNTX_TYPE, VIM_TYPE, /* SPACE */ BITWARDEN_UNLOCK,   K9S_NS_TYPE,   KC_NO,   KC_NO,  KC_DEL ,   KC_EQL,
         
         KC_NO, KC_NO, KC_LOPT,  KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO,   KC_NO,    KC_PIPE,   KC_NO
         ),
@@ -379,6 +381,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         pw[i] = charset[rand() % (sizeof(charset) - 1)];
                     }
                     pw[23] = '\0';
+                    save_on_cliboard(pw);
                     send_string(pw); // types the password
                     current_logo = 9;
                 }
@@ -455,6 +458,17 @@ static void open_using_spotlight(const char *name) {
     send_string_with_delay(name, 0);
     // Enter not working with tap_code16 for some reason since MacOS 26
     // tap_code(KC_ENTER);
+}
+
+static void save_on_cliboard(const char *str) {
+    // Note: Cannot copy to clipboard from keyboard firmware.
+    // The keyboard runs on a microcontroller, not macOS.
+    // use sendstring to write after write use shift arrow 23 times to select all and then copy to clipboard
+    send_string_with_delay(str, 0);
+    for (int i = 0; i < 23; i++) {
+        tap_code16(S(KC_LEFT));
+    }
+    tap_code16(G(KC_C));  // Cmd+C to copy on macOS
 }
 
 bool oled_task_user(void) {
