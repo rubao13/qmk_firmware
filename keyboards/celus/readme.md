@@ -162,8 +162,9 @@ The default firmware includes four layers:
 |LOWER |Q|VIM_WQ_TYPE| Type ´:wq´|
 |LOWER |R|LOGO_RIO| Set Rio logo on display |
 |LOWER |T|K9S_CTX_TYPE| Type ´:ctx´ |
-|LOWER |A|AWS_SSO|Type ´aws sso login´ |
-|LOWER |S|CMD_S|Save file |
+|LOWER |Backspace|KC_DEL| DEL key |
+|LOWER |A|CMD_ALL|Select all shortcut |
+|LOWER |S|CMD_SAVE|Save file |
 |LOWER |G|GIT_TYPE|Type ´git commit --amend´ |
 |LOWER |L|LOGO_LION| Set Lion logo on display |
 |LOWER |Z|CMD_TAB| CMD + TAB go previous app|
@@ -185,19 +186,20 @@ The default firmware includes four layers:
 |RAISE |9|K9S_OPEN| Open K9S |
 |RAISE |VOLUME|QK_BOOT| Reset Raspberry firmware |
 |RAISE |TAB| APPLE_AI | Apple Intelligence|
-|RAISE |T|K9S_CTX_TYPE| Type ´:ctx´ |
-|RAISE |O|KC_MPRV| Music Control Previous Song |
-|RAISE |P|KC_MPLY| Music Control Play Song |
-|RAISE |Backspace|KC_MNXT| Music Control Next Song |
+|RAISE |T|K8SCNTX_TYPE|Type ´kubectl config use-context site-´ |
+|RAISE |P|K9S_PODS_TYPE| Type ´:pods´ |
+|RAISE |Backspace|KC_DEL| DEL key |
 |RAISE |A|AWS_SSO|Type ´aws sso login´ |
 |RAISE |S|SPOTIFY_OPEN| Open Spotify|
+|RAISE |D|K9S_DEPLOY_TYPE| Type ´:deploy´|
 |RAISE |G|GIT_CLONE_TYPE|Type ´git clone https://$gusr:$tok@git.celus.co ´ |
 |RAISE |K|KUBECTL_TYPE|Type ´kubectl ´ |
 |RAISE |L|LOCK_SCREEN| Lock computer |
-|RAISE |C|K8SCNTX_TYPE|Type ´kubectl config use-context site-´ |
+|RAISE |C|K9S_CTX_TYPE| Type ´:ctx´ |
 |RAISE |V|VIM_TYPE|Type ´vim ´ |
 |RAISE |B|BITWARDEN_UNLOCK| Bitwarden unlock shortcut|
 |RAISE |N|K9S_NS_TYPE| Type ´:ns´|
+RAISE |M|SPOTIFY_OPEN| Open Spotify|
 
 ### Custom Macro Reference
 

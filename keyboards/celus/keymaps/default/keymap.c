@@ -80,6 +80,9 @@ enum custom_keycodes {
     TYPE_EMAIL_GMAIL,
     TYPE_EMAIL_DEUTSCH,
     CMD_V,
+    CMD_ALL,
+    K9S_PODS_TYPE,
+    K9S_DEPLOY_TYPE
 };
 
 // Variable to track current logo
@@ -117,11 +120,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │MCL│VWQ│   │   │RIO│KXT│   │   │   │   │ [ │ ] │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │AWS│SAV│   │   │GIT│   │   │   │   │LIO│   │   │
+     * │   │ALL│SAV│   │   │GIT│   │   │   │   │LIO│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│   │MTb│CQT│LOK│PST│   │BUL│KNS│   │   │DEL│ = │
+     * │SFT│   │MTb│ + │LOK│PST│   │BUL│KNS│   │   │DEL│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │ \ │CAP│LUN|L1D│  Mac │LOGOS│ENTER │   │   │ | │   │
+     * │ \ │CAP│LUN|L1D│  Mac │LOGOS│ENTER │   │   │ | │CMQ│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
   [_LOWER] = LAYOUT(
@@ -129,37 +132,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
     KC_MCTL, VIM_WQ_TYPE, KC_NO,  KC_NO, LOGO_RIO, K9S_CTX_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,   KC_LBRC,  KC_RBRC, KC_DEL,
     
-    KC_NO, AWS_SSO, CMD_SAVE, KC_NO, KC_NO, GIT_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, LOGO_LION, KC_NO, KC_NO,
+    KC_NO, CMD_ALL, CMD_SAVE, KC_NO, KC_NO, GIT_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, LOGO_LION, KC_NO, KC_NO,
     
-    KC_LSFT, KC_NO, CMD_TAB, CMD_Q, LOCK_SCREEN, CMD_V, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, KC_NO, KC_NO,  KC_DEL, KC_EQL,
+    KC_LSFT, KC_NO, CMD_TAB, KC_KP_PLUS, LOCK_SCREEN, CMD_V, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, KC_NO, KC_NO,  KC_DEL, KC_EQL,
     
-    KC_BSLS, KC_CAPS,LOGO_LUNCH, KC_NO,KC_LGUI , LOGO_SWITCH,KC_ENT,   KC_NO,   KC_NO,    KC_PIPE,   KC_NO
+    KC_BSLS, KC_CAPS,LOGO_LUNCH, KC_NO, KC_LGUI , LOGO_SWITCH, KC_ENT,   KC_NO,   KC_NO,    KC_PIPE,   CMD_Q
         ),
     /*
      * _RAISE
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
      * │LOK│SAF│CMT│BRV│FRX│EDG│   │   │   │PWD│K9S│SPO│FIR│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │AAI│   │   │   │   │KXT│   │   │   │   │PRV│PLY│NXT│
+     * │AAI│   │   │   │   │KXT│   │   │   │   │   │POD│DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │AWS│SPO│   │   │GCL│   │   │   │K8S│LOK│   │   │
+     * │   │AWS│SPO│DLY│   │GCL│   │   │   │K8S│LOK│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│   │   │   │KCX│VIM│   │BUL│KNS│   │   │DEL│ = │
+     * │SFT│   │   │   │KCX│VIM│   │BUL│KNS│   │SPO│CMQ│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │   │   │OPT│   │  Mac │LOGOS│ ENTER│L2D│   │ | │   │
+     * │   │   │OPT│   │  Mac │LOGOS│ ENTER│L2D│PRV│PLY│NXT│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
   [_RAISE] = LAYOUT(
         LOCK_SCREEN, SAFARI_OPEN, COMET_OPEN, BRAVE_OPEN,  FIREFOX_OPEN,  EDGE_OPEN, /* SPACE */ KC_NO,   KC_NO,   PASSW_GEN_TYPE,   K9S_OPEN,   SPOTIFY_OPEN,   QK_BOOT,
         
-        APPLE_AI, KC_NO, KC_NO, KC_NO, KC_NO, K9S_CTX_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,    KC_MPRV,   KC_MPLY,   KC_MNXT,
+        APPLE_AI, KC_NO, KC_NO, KC_NO, KC_NO, K8SCNTX_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,    KC_NO,   K9S_PODS_TYPE,   KC_DEL,
         
-        KC_NO,  AWS_SSO, SPOTIFY_OPEN, KC_NO, KC_NO,GIT_CLONE_TYPE, /* SPACE */ KC_NO, KC_NO, KUBECTL_TYPE,  LOCK_SCREEN, KC_NO, KC_NO,
+        KC_NO,  AWS_SSO, SPOTIFY_OPEN, K9S_DEPLOY_TYPE, KC_NO,GIT_CLONE_TYPE, /* SPACE */ KC_NO, KC_NO, KUBECTL_TYPE,  LOCK_SCREEN, KC_NO, KC_NO,
         
-        KC_LSFT, KC_NO, KC_NO,  KC_NO, K8SCNTX_TYPE, VIM_TYPE, /* SPACE */ BITWARDEN_UNLOCK,   K9S_NS_TYPE,   KC_NO,   KC_NO,  KC_DEL ,   KC_EQL,
+        KC_LSFT, KC_NO, KC_NO,  KC_NO, K9S_CTX_TYPE, VIM_TYPE, /* SPACE */ BITWARDEN_UNLOCK,   K9S_NS_TYPE,   SPOTIFY_OPEN,   KC_NO,  CMD_Q ,   KC_EQL,
         
-        KC_NO, KC_NO, KC_LOPT,  KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO,   KC_NO,    KC_PIPE,   KC_NO
+        KC_NO, KC_NO, KC_LOPT,  KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO,   KC_MPRV,   KC_MPLY,   KC_MNXT
         ),
     /*
      * This layer is not used currently
@@ -445,6 +448,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CMD_V:
             if (record->event.pressed) {
                 SEND_STRING(SS_LGUI("v"));
+            }
+            return false;
+        case CMD_ALL:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("a"));
+                wait_ms(200);
+                SEND_STRING(SS_LGUI("c"));
+            }
+            return false;
+        case K9S_PODS_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":pods");
+            }
+            return false;
+        case K9S_DEPLOY_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":deployments");
             }
             return false;
     }
