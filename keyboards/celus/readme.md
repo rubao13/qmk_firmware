@@ -190,7 +190,7 @@ The default firmware includes four layers:
 |RAISE |P|K9S_PODS_TYPE| Type ´:pods´ |
 |RAISE |Backspace|KC_DEL| DEL key |
 |RAISE |A|AWS_SSO|Type ´aws sso login´ |
-|RAISE |S|SPOTIFY_OPEN| Open Spotify|
+|RAISE |S|K9S_SVC_TYPE| Type ´:services´ |
 |RAISE |D|K9S_DEPLOY_TYPE| Type ´:deploy´|
 |RAISE |G|GIT_CLONE_TYPE|Type ´git clone https://$gusr:$tok@git.celus.co ´ |
 |RAISE |K|KUBECTL_TYPE|Type ´kubectl ´ |
@@ -199,7 +199,7 @@ The default firmware includes four layers:
 |RAISE |V|VIM_TYPE|Type ´vim ´ |
 |RAISE |B|BITWARDEN_UNLOCK| Bitwarden unlock shortcut|
 |RAISE |N|K9S_NS_TYPE| Type ´:ns´|
-RAISE |M|SPOTIFY_OPEN| Open Spotify|
+|RAISE |M|SPOTIFY_OPEN| Open Spotify|
 
 ### Custom Macro Reference
 

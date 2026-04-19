@@ -1,7 +1,6 @@
 // Copyright 2023 QMK
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-
 #include QMK_KEYBOARD_H
 #include "lib/logos.h"
 #include "lib/wpm.h"
@@ -24,10 +23,10 @@ enum layer_number {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_QWERTY] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
-    [_LOWER]  = { ENCODER_CCW_CW(KC_BRIGHTNESS_UP, KC_BRIGHTNESS_DOWN)  },
-    [_RAISE]  = { ENCODER_CCW_CW(KC_DOWN, KC_UP)  },
-    [_ADJUST] = { ENCODER_CCW_CW(KC_NO, KC_NO) },
+    [_QWERTY] = {ENCODER_CCW_CW(KC_VOLU, KC_VOLD)},
+    [_LOWER]  = {ENCODER_CCW_CW(KC_BRIGHTNESS_UP, KC_BRIGHTNESS_DOWN)},
+    [_RAISE]  = {ENCODER_CCW_CW(KC_DOWN, KC_UP)},
+    [_ADJUST] = {ENCODER_CCW_CW(KC_NO, KC_NO)},
 };
 #endif
 
@@ -82,7 +81,9 @@ enum custom_keycodes {
     CMD_V,
     CMD_ALL,
     K9S_PODS_TYPE,
-    K9S_DEPLOY_TYPE
+    K9S_DEPLOY_TYPE,
+    K9S_SVC_TYPE,
+    CMD_V_URL,
 };
 
 // Variable to track current logo
@@ -106,13 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * │ / │CTL│OPT│L1 │  Mac  │   SPACE   │ L2│ ← │ ↓ │ → │
      * └───┴───┴───┴───┴───────┴───────┴───┴───┴───┴───┴───┘
      */
-  [_QWERTY] = LAYOUT(
-        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4, KC_5, /* SPACE */ KC_6,   KC_7, KC_8,    KC_9,    KC_0, KC_KB_MUTE,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R, KC_T, /* SPACE */ KC_Y,   KC_U, KC_I,    KC_O,    KC_P, KC_BSPC,
-        KC_SCLN, KC_A,    KC_S,    KC_D,    KC_F, KC_G, /* SPACE */ KC_H,   KC_J, KC_K,    KC_L,    KC_COMM,  KC_DOT,
-        KC_LSFT,   KC_QUOT, KC_Z,  KC_X,    KC_C, KC_V, /* SPACE */ KC_B,   KC_N, KC_M, KC_GRV,  KC_UP, KC_MINS,
-        KC_SLSH, KC_LCTL, KC_LOPT, MO(1),     KC_LGUI,    KC_SPC,   KC_SPC, MO(2),  KC_LEFT,   KC_DOWN, KC_RIGHT
-        ),
+    [_QWERTY] = LAYOUT(KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, /* SPACE */ KC_6, KC_7, KC_8, KC_9, KC_0, KC_KB_MUTE, KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, /* SPACE */ KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, KC_SCLN, KC_A, KC_S, KC_D, KC_F, KC_G, /* SPACE */ KC_H, KC_J, KC_K, KC_L, KC_COMM, KC_DOT, KC_LSFT, KC_QUOT, KC_Z, KC_X, KC_C, KC_V, /* SPACE */ KC_B, KC_N, KC_M, KC_GRV, KC_UP, KC_MINS, KC_SLSH, KC_LCTL, KC_LOPT, MO(1), KC_LGUI, KC_SPC, KC_SPC, MO(2), KC_LEFT, KC_DOWN, KC_RIGHT),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
@@ -127,17 +122,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * │ \ │CAP│LUN|L1D│  Mac │LOGOS│ENTER │   │   │ | │CMQ│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
-  [_LOWER] = LAYOUT(
-    LOCK_SCREEN, LOGO_CELUS, TYPE_EMAIL_WORK, TYPE_EMAIL_GMAIL, TYPE_EMAIL_DEUTSCH, SCREENSHOT, /* SPACE */ ZOOM_OPEN,   CODE_OPEN,   TXTEDIT_OPEN,   KC_LCBR,   KC_RCBR, KC_F12,
-    
-    KC_MCTL, VIM_WQ_TYPE, KC_NO,  KC_NO, LOGO_RIO, K9S_CTX_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,   KC_LBRC,  KC_RBRC, KC_DEL,
-    
-    KC_NO, CMD_ALL, CMD_SAVE, KC_NO, KC_NO, GIT_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, LOGO_LION, KC_NO, KC_NO,
-    
-    KC_LSFT, KC_NO, CMD_TAB, KC_KP_PLUS, LOCK_SCREEN, CMD_V, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, KC_NO, KC_NO,  KC_DEL, KC_EQL,
-    
-    KC_BSLS, KC_CAPS,LOGO_LUNCH, KC_NO, KC_LGUI , LOGO_SWITCH, KC_ENT,   KC_NO,   KC_NO,    KC_PIPE,   CMD_Q
-        ),
+    [_LOWER] = LAYOUT(LOCK_SCREEN, LOGO_CELUS, TYPE_EMAIL_WORK, TYPE_EMAIL_GMAIL, TYPE_EMAIL_DEUTSCH, SCREENSHOT, /* SPACE */ KC_NO, KC_SLSH, KC_NO, KC_LBRC, KC_RBRC, KC_F12,
+
+                      KC_MCTL, VIM_WQ_TYPE, KC_NO, KC_NO, LOGO_RIO, TERRAFORM_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, KC_LCBR, KC_RCBR, KC_DEL,
+
+                      KC_NO, CMD_ALL, CMD_SAVE, KC_NO, KC_NO, GIT_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, LOGO_LION, KC_NO, KC_NO,
+
+                      KC_LSFT, KC_NO, CMD_TAB, KC_KP_PLUS, LOCK_SCREEN, CMD_V, /* SPACE */ BITWARDEN_UNLOCK, KC_TILDE, KC_NO, KC_NO, KC_DEL, KC_EQL,
+
+                      KC_BSLS, KC_CAPS, LOGO_LUNCH, KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO, KC_NO, KC_PIPE, CMD_Q),
     /*
      * _RAISE
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
@@ -145,25 +138,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │AAI│   │   │   │   │KXT│   │   │   │   │   │POD│DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │AWS│SPO│DLY│   │GCL│   │   │   │K8S│LOK│   │   │
+     * │   │AWS│SVC│DLY│   │GCL│   │   │   │K8S│LOK│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│   │   │   │KCX│VIM│   │BUL│KNS│   │SPO│CMQ│ = │
+     * │SFT│   │   │   │KCX│PSU│   │BUL│KNS│SPO│   │CMQ│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
      * │   │   │OPT│   │  Mac │LOGOS│ ENTER│L2D│PRV│PLY│NXT│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
-  [_RAISE] = LAYOUT(
-        LOCK_SCREEN, SAFARI_OPEN, COMET_OPEN, BRAVE_OPEN,  FIREFOX_OPEN,  EDGE_OPEN, /* SPACE */ KC_NO,   KC_NO,   PASSW_GEN_TYPE,   K9S_OPEN,   SPOTIFY_OPEN,   QK_BOOT,
-        
-        APPLE_AI, KC_NO, KC_NO, KC_NO, KC_NO, K8SCNTX_TYPE, /* SPACE */ KC_NO,   KC_NO,   KC_NO,    KC_NO,   K9S_PODS_TYPE,   KC_DEL,
-        
-        KC_NO,  AWS_SSO, SPOTIFY_OPEN, K9S_DEPLOY_TYPE, KC_NO,GIT_CLONE_TYPE, /* SPACE */ KC_NO, KC_NO, KUBECTL_TYPE,  LOCK_SCREEN, KC_NO, KC_NO,
-        
-        KC_LSFT, KC_NO, KC_NO,  KC_NO, K9S_CTX_TYPE, VIM_TYPE, /* SPACE */ BITWARDEN_UNLOCK,   K9S_NS_TYPE,   SPOTIFY_OPEN,   KC_NO,  CMD_Q ,   KC_EQL,
-        
-        KC_NO, KC_NO, KC_LOPT,  KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO,   KC_MPRV,   KC_MPLY,   KC_MNXT
-        ),
+    [_RAISE] = LAYOUT(LOCK_SCREEN, SAFARI_OPEN, COMET_OPEN, BRAVE_OPEN, FIREFOX_OPEN, EDGE_OPEN, /* SPACE */ KC_NO, KC_NO, PASSW_GEN_TYPE, K9S_OPEN, SPOTIFY_OPEN, QK_BOOT,
+
+                      APPLE_AI, KC_NO, KC_NO, KC_NO, KC_NO, K8SCNTX_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, KC_NO, K9S_PODS_TYPE, KC_DEL,
+
+                      KC_NO, AWS_SSO, K9S_SVC_TYPE, K9S_DEPLOY_TYPE, KC_NO, GIT_CLONE_TYPE, /* SPACE */ KC_NO, KC_NO, KUBECTL_TYPE, LOCK_SCREEN, KC_NO, KC_NO,
+
+                      KC_LSFT, KC_NO, KC_NO, KC_NO, K9S_CTX_TYPE, CMD_V_URL, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, SPOTIFY_OPEN, KC_NO, CMD_Q, KC_EQL,
+
+                      KC_NO, KC_NO, KC_LOPT, KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO, KC_MPRV, KC_MPLY, KC_MNXT),
     /*
      * This layer is not used currently
      * _ADJUST
@@ -179,14 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * │   │   │   │   │       │   │       │   │   │   │   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
-    [_ADJUST] = LAYOUT(
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO,        KC_NO, KC_NO, KC_NO, KC_NO
-    )
-};
+    [_ADJUST] = LAYOUT(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO)};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -373,13 +357,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // Random password generator makes random 23 characters
         case PASSW_GEN_TYPE:
             if (record->event.pressed) {
-                {   static bool seeded = false;
+                {
+                    static bool seeded = false;
                     if (!seeded) {
                         srand(timer_read()); // simple seed
                         seeded = true;
                     }
                     static const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                    char pw[24]; // 23 chars + null
+                    char              pw[24]; // 23 chars + null
                     for (uint8_t i = 0; i < 23; i++) {
                         pw[i] = charset[rand() % (sizeof(charset) - 1)];
                     }
@@ -417,12 +402,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case K9S_CTX_TYPE:
             if (record->event.pressed) {
-                SEND_STRING(":ctx");
+                SEND_STRING(":ctx" SS_TAP(X_ENTER));
             }
             return false;
         case K9S_NS_TYPE:
             if (record->event.pressed) {
-                SEND_STRING(":ns");
+                SEND_STRING(":ns" SS_TAP(X_ENTER));
             }
             return false;
         case CMD_SAVE:
@@ -459,12 +444,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case K9S_PODS_TYPE:
             if (record->event.pressed) {
-                SEND_STRING(":pods");
+                SEND_STRING(":pods" SS_TAP(X_ENTER));
             }
             return false;
         case K9S_DEPLOY_TYPE:
             if (record->event.pressed) {
-                SEND_STRING(":deployments");
+                SEND_STRING(":deployments" SS_TAP(X_ENTER));
+            }
+            return false;
+        case K9S_SVC_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":services" SS_TAP(X_ENTER));
+            }
+            return false;
+        // This is a CMD + v but pastes in url markdown format [url](url) and pastes content between the parentheses
+        case CMD_V_URL:
+            if (record->event.pressed) {
+                SEND_STRING("[link here](");
+                wait_ms(50);
+                SEND_STRING(SS_LGUI("v"));
+                wait_ms(50);
+                SEND_STRING(")");
             }
             return false;
     }
@@ -488,7 +488,7 @@ static void save_on_cliboard(const char *str) {
     for (int i = 0; i < 23; i++) {
         tap_code16(S(KC_LEFT));
     }
-    tap_code16(G(KC_C));  // Cmd+C to copy on macOS
+    tap_code16(G(KC_C)); // Cmd+C to copy on macOS
 }
 
 bool oled_task_user(void) {
@@ -496,17 +496,39 @@ bool oled_task_user(void) {
     uint8_t layer = get_highest_layer(layer_state);
     if (layer == _QWERTY) {
         switch (current_logo) {
-            case 0: render_tomorrowland(); break;
-            case 1: render_lion(); break;
-            case 2: render_bayern(); break;
-            case 3: render_flamengo(); break;
-            case 4: render_celus(); break;
-            case 5: render_rio(); break;
-            case 6: render_lunch(); break;
-            case 7: render_theoffice(); break;
-            case 8: render_dj(); break;
-            case 9: render_passwgen(); break;
-            default: render_tomorrowland(); break;
+            case 0:
+                render_tomorrowland();
+                break;
+            case 1:
+                render_lion();
+                break;
+            case 2:
+                render_bayern();
+                break;
+            case 3:
+                render_flamengo();
+                break;
+            case 4:
+                render_celus();
+                break;
+            case 5:
+                render_rio();
+                break;
+            case 6:
+                render_lunch();
+                break;
+            case 7:
+                render_theoffice();
+                break;
+            case 8:
+                render_dj();
+                break;
+            case 9:
+                render_passwgen();
+                break;
+            default:
+                render_tomorrowland();
+                break;
         }
     } else {
         switch (layer) {
