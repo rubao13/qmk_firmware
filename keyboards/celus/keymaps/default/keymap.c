@@ -84,6 +84,10 @@ enum custom_keycodes {
     K9S_DEPLOY_TYPE,
     K9S_SVC_TYPE,
     CMD_V_URL,
+    K9S_INGRESS_TYPE,
+    K9S_EXTERNALSECRET_TYPE,
+    K9S_CRONJOB_TYPE,
+    K9S_STATEFULSET_TYPE,
 };
 
 // Variable to track current logo
@@ -104,55 +108,56 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │SFT│ ' │ Z │ X │ C │ V │   │ B │ N │ M │ ` │ ↑ │ - │
      * ├───┼───┼───┼───┼───┴───┼───┴───┴───┼───┼───┼───┼───┤
-     * │ / │CTL│OPT│L1 │  Mac  │   SPACE   │ L2│ ← │ ↓ │ → │
+     * │ / │Mac│OPT│L1 │  CTRL │   SPACE   │ L2│ ← │ ↓ │ → │
      * └───┴───┴───┴───┴───────┴───────┴───┴───┴───┴───┴───┘
      */
-    [_QWERTY] = LAYOUT(KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, /* SPACE */ KC_6, KC_7, KC_8, KC_9, KC_0, KC_KB_MUTE, KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, /* SPACE */ KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, KC_SCLN, KC_A, KC_S, KC_D, KC_F, KC_G, /* SPACE */ KC_H, KC_J, KC_K, KC_L, KC_COMM, KC_DOT, KC_LSFT, KC_QUOT, KC_Z, KC_X, KC_C, KC_V, /* SPACE */ KC_B, KC_N, KC_M, KC_GRV, KC_UP, KC_MINS, KC_SLSH, KC_LCTL, KC_LOPT, MO(1), KC_LGUI, KC_SPC, KC_SPC, MO(2), KC_LEFT, KC_DOWN, KC_RIGHT),
+    [_QWERTY] = LAYOUT(KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, /* SPACE */ KC_6, KC_7, KC_8, KC_9, KC_0, KC_KB_MUTE, KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, /* SPACE */ KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, KC_SCLN, KC_A, KC_S, KC_D, KC_F, KC_G, /* SPACE */ KC_H, KC_J, KC_K, KC_L, KC_COMM, KC_DOT, KC_LSFT, KC_QUOT, KC_Z, KC_X, KC_C, KC_V, /* SPACE */ KC_B, KC_N, KC_M, KC_GRV, KC_UP, KC_MINS,
+        KC_SLSH, KC_LGUI, KC_LOPT, MO(1), KC_LCTL, /* SPA */KC_SPC/* CE */, KC_SPC, MO(2), KC_LEFT, KC_DOWN, KC_RIGHT),
     /*
      * LOWER
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │LOK│CEL│EMC│EMG│EMD│SHT│   │ZOM│VSC│TXT│ { │ } │F12│
+     * │LOK│CEL│EMW│EMG│EMD│SHT│   │   │ / │   │ [ │ ] │F12│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │MCL│VWQ│   │   │RIO│KXT│   │   │   │   │ [ │ ] │DEL│
+     * │MCL│VWQ│   │   │RIO│   │   │   │   │   │ { │ } │DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
      * │   │ALL│SAV│   │   │GIT│   │   │   │   │LIO│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│   │MTb│ + │LOK│PST│   │BUL│KNS│   │   │DEL│ = │
+     * │SFT│   │MTb│ + │LOK│PST│   │BWU│ ~ │   │   │DEL│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │ \ │CAP│LUN|L1D│  Mac │LOGOS│ENTER │   │   │ | │CMQ│
+     * │ \ │CAP│LUN│   │  Mac  │LGO│ ENTER │   │   │ | │   │
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
     [_LOWER] = LAYOUT(LOCK_SCREEN, LOGO_CELUS, TYPE_EMAIL_WORK, TYPE_EMAIL_GMAIL, TYPE_EMAIL_DEUTSCH, SCREENSHOT, /* SPACE */ KC_NO, KC_SLSH, KC_NO, KC_LBRC, KC_RBRC, KC_F12,
 
-                      KC_MCTL, VIM_WQ_TYPE, KC_NO, KC_NO, LOGO_RIO, TERRAFORM_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, KC_LCBR, KC_RCBR, KC_DEL,
+                      KC_MCTL, VIM_WQ_TYPE, KC_NO, KC_NO, LOGO_RIO, KC_NO, /* SPACE */ KC_NO, KC_NO, KC_NO, KC_LCBR, KC_RCBR, KC_DEL,
 
                       KC_NO, CMD_ALL, CMD_SAVE, KC_NO, KC_NO, GIT_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, LOGO_LION, KC_NO, KC_NO,
 
                       KC_LSFT, KC_NO, CMD_TAB, KC_KP_PLUS, LOCK_SCREEN, CMD_V, /* SPACE */ BITWARDEN_UNLOCK, KC_TILDE, KC_NO, KC_NO, KC_DEL, KC_EQL,
 
-                      KC_BSLS, KC_CAPS, LOGO_LUNCH, KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO, KC_NO, KC_PIPE, CMD_Q),
+                      KC_BSLS, KC_CAPS, LOGO_LUNCH, KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO, KC_NO, KC_PIPE, KC_NO),
     /*
      * _RAISE
      * ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-     * │LOK│SAF│CMT│BRV│FRX│EDG│   │   │   │PWD│K9S│SPO│FIR│
+     * │LOK│SAF│CMT│BRV│FRX│EDG│   │   │   │PWD│K9S│SPO│BOO│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │AAI│   │   │   │   │KXT│   │   │   │   │   │POD│DEL│
+     * │AAI│   │   │EXS│   │KXT│   │   │   │IGS│   │POD│DEL│
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │   │AWS│SVC│DLY│   │GCL│   │   │   │K8S│LOK│   │   │
+     * │   │AWS│SVC│DPL│STS│GCL│   │   │CRJ│KCT│LOK│   │   │
      * ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-     * │SFT│   │   │   │KCX│PSU│   │BUL│KNS│SPO│   │CMQ│ = │
+     * │SFT│   │   │   │CTX│MDL│   │BWU│ NS│SPO│   │DEL│ = │
      * ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
-     * │   │   │OPT│   │  Mac │LOGOS│ ENTER│L2D│PRV│PLY│NXT│
+     * │   │   │OPT│   │  Mac  │LGO│ ENTER │   │PRV│PLY│NXT│
      * └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
      */
 
     [_RAISE] = LAYOUT(LOCK_SCREEN, SAFARI_OPEN, COMET_OPEN, BRAVE_OPEN, FIREFOX_OPEN, EDGE_OPEN, /* SPACE */ KC_NO, KC_NO, PASSW_GEN_TYPE, K9S_OPEN, SPOTIFY_OPEN, QK_BOOT,
 
-                      APPLE_AI, KC_NO, KC_NO, KC_NO, KC_NO, K8SCNTX_TYPE, /* SPACE */ KC_NO, KC_NO, KC_NO, KC_NO, K9S_PODS_TYPE, KC_DEL,
+                      APPLE_AI, KC_NO, KC_NO, K9S_EXTERNALSECRET_TYPE, KC_NO, K8SCNTX_TYPE, /* SPACE */ KC_NO, KC_NO, K9S_INGRESS_TYPE, KC_NO, K9S_PODS_TYPE, KC_DEL,
 
-                      KC_NO, AWS_SSO, K9S_SVC_TYPE, K9S_DEPLOY_TYPE, KC_NO, GIT_CLONE_TYPE, /* SPACE */ KC_NO, KC_NO, KUBECTL_TYPE, LOCK_SCREEN, KC_NO, KC_NO,
+                      KC_NO, AWS_SSO, K9S_SVC_TYPE, K9S_DEPLOY_TYPE, K9S_STATEFULSET_TYPE, GIT_CLONE_TYPE, /* SPACE */ KC_NO, K9S_CRONJOB_TYPE, KUBECTL_TYPE, LOCK_SCREEN, KC_NO, KC_NO,
 
-                      KC_LSFT, KC_NO, KC_NO, KC_NO, K9S_CTX_TYPE, CMD_V_URL, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, SPOTIFY_OPEN, KC_NO, CMD_Q, KC_EQL,
+                      KC_LSFT, KC_NO, KC_NO, KC_NO, K9S_CTX_TYPE, CMD_V_URL, /* SPACE */ BITWARDEN_UNLOCK, K9S_NS_TYPE, SPOTIFY_OPEN, KC_NO, KC_DEL, KC_EQL,
 
                       KC_NO, KC_NO, KC_LOPT, KC_NO, KC_LGUI, LOGO_SWITCH, KC_ENT, KC_NO, KC_MPRV, KC_MPLY, KC_MNXT),
     /*
@@ -332,7 +337,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case GIT_CLONE_TYPE:
             if (record->event.pressed) {
                 // Requires envirohment variables gusr and tok to your git username and personal access token respectively
-                SEND_STRING("git clone https://$gusr:$tok@git.celus.co ");
+                SEND_STRING("git clone https://$gusr:$tok@$gitsite/");
+                wait_ms(50);
+                SEND_STRING(SS_LGUI("v"));
+                wait_ms(50);
+                SEND_STRING(".git");
             }
             return false;
         case COMET_OPEN:
@@ -410,6 +419,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(":ns" SS_TAP(X_ENTER));
             }
             return false;
+        case K9S_INGRESS_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":ingressroute" SS_TAP(X_ENTER));
+            }
+            return false;
         case CMD_SAVE:
             if (record->event.pressed) {
                 SEND_STRING(SS_LGUI("s"));
@@ -465,6 +479,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_LGUI("v"));
                 wait_ms(50);
                 SEND_STRING(")");
+            }
+            return false;
+        case K9S_EXTERNALSECRET_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":externalsecrets" SS_TAP(X_ENTER));
+            }
+            return false;
+        case K9S_CRONJOB_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":cronjobs" SS_TAP(X_ENTER));
+            }
+            return false;
+        case K9S_STATEFULSET_TYPE:
+            if (record->event.pressed) {
+                SEND_STRING(":statefulsets" SS_TAP(X_ENTER));
             }
             return false;
     }

@@ -36,9 +36,18 @@ QWERTY Layer:
  ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
  │SFT│ ' │ Z │ X │ C │ V │   │ B │ N │ M │ ` │ ↑ │ - │
  ├───┼───┼───┼───┼───┴───┼───┴───┴───┼───┼───┼───┼───┤
- │ / │CTL│OPT│L1 │  Mac  │   SPACE   │ L2│ ← │ ↓ │ → │
+ │ / │Mac│OPT│L1 │  CTRL │   SPACE   │ L2│ ← │ ↓ │ → │
  └───┴───┴───┴───┴───────┴───────┴───┴───┴───┴───┴───┘
 ```
+
+### Rotary Encoder
+
+| Layer | Counter-clockwise | Clockwise |
+|-------|-------------------|-----------|
+| QWERTY | Volume up | Volume down |
+| LOWER | Brightness up | Brightness down |
+| RAISE | Arrow Down | Arrow Up |
+| ADJUST | — | — |
 
 ## Getting Started
 
@@ -144,80 +153,148 @@ The default firmware includes four layers:
 - **Layer 0**: QWERTY (base layer)
 - **Layer 1**: Lower (symbols, arrows, logos and shortcuts)
 - **Layer 2**: Raise (apps shortcuts, music, firmware update)
-- **Layer 3**: Adjust (RGB, audio, keyboard settings)
+- **Layer 3**: Adjust (reserved — currently empty and not reachable)
 
-#### Layers LOWER & RAISE Shortcuts table
-| Layer | QWERTY |  Function |  Description |
-|-------|--------------|-----------|--------------|
-|LOWER |ESC|LOCK_SCREEN| Lock computer|
-|LOWER |1|LOGO_CELUS| Set Celus logo on display |
-|LOWER |2|TYPE_EMAIL_WORK| Type work email |
-|LOWER |3|TYPE_EMAIL_GMAIL| Type gmail email |
-|LOWER |4|TYPE_EMAIL_DEUTSCH| Type gmx email|
-|LOWER |5|SCREENSHOT| Type CMD + Shift + 5|
-|LOWER |6|ZOOM_OPEN| Open Zoom|
-|LOWER |7|CODE_OPEN| Open VS Code|
-|LOWER |8|TXTEDIT_OPEN| Open TextEdit app |
-|LOWER |TAB| KC_MCTL | Mac Mission Control|
-|LOWER |Q|VIM_WQ_TYPE| Type ´:wq´|
-|LOWER |R|LOGO_RIO| Set Rio logo on display |
-|LOWER |T|K9S_CTX_TYPE| Type ´:ctx´ |
-|LOWER |Backspace|KC_DEL| DEL key |
-|LOWER |A|CMD_ALL|Select all shortcut |
-|LOWER |S|CMD_SAVE|Save file |
-|LOWER |G|GIT_TYPE|Type ´git commit --amend´ |
-|LOWER |L|LOGO_LION| Set Lion logo on display |
-|LOWER |Z|CMD_TAB| CMD + TAB go previous app|
-|LOWER |X|CMD_Q| Close app |
-|LOWER |C|LOCK_SCREEN| Lock computer|
-|LOWER |V|CMD_V| Past clipboard |
-|LOWER |B|BITWARDEN_UNLOCK| Bitwarden unlock shortcut|
-|LOWER |N|K9S_NS_TYPE| Type ´:ns´|
+#### LOWER Layer
 
-| Layer | QWERTY |  Function |  Description |
-|-------|--------------|-----------|--------------|
-|RAISE |ESC|LOCK_SCREEN| Lock computer |
-|RAISE |1|SAFARI_OPEN| Open Safari browser |
-|RAISE |2|COMET_OPEN| Open Comet browser  |
-|RAISE |3|BRAVE_OPEN| Open Brave browser |
-|RAISE |4|FIREFOX_OPEN| Open Firefox browser |
-|RAISE |5|EDGE_OPEN| Open Edge browser |
-|RAISE |8|PASSW_GEN_TYPE| Generates 23 char passwords|
-|RAISE |9|K9S_OPEN| Open K9S |
-|RAISE |VOLUME|QK_BOOT| Reset Raspberry firmware |
-|RAISE |TAB| APPLE_AI | Apple Intelligence|
-|RAISE |T|K8SCNTX_TYPE|Type ´kubectl config use-context site-´ |
-|RAISE |P|K9S_PODS_TYPE| Type ´:pods´ |
-|RAISE |Backspace|KC_DEL| DEL key |
-|RAISE |A|AWS_SSO|Type ´aws sso login´ |
-|RAISE |S|K9S_SVC_TYPE| Type ´:services´ |
-|RAISE |D|K9S_DEPLOY_TYPE| Type ´:deploy´|
-|RAISE |G|GIT_CLONE_TYPE|Type ´git clone https://$gusr:$tok@git.celus.co ´ |
-|RAISE |K|KUBECTL_TYPE|Type ´kubectl ´ |
-|RAISE |L|LOCK_SCREEN| Lock computer |
-|RAISE |C|K9S_CTX_TYPE| Type ´:ctx´ |
-|RAISE |V|VIM_TYPE|Type ´vim ´ |
-|RAISE |B|BITWARDEN_UNLOCK| Bitwarden unlock shortcut|
-|RAISE |N|K9S_NS_TYPE| Type ´:ns´|
-|RAISE |M|SPOTIFY_OPEN| Open Spotify|
+```
+ ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
+ │LOK│CEL│EMW│EMG│EMD│SHT│   │   │ / │   │ [ │ ] │F12│
+ ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+ │MCL│:wq│   │   │RIO│   │   │   │   │   │ { │ } │DEL│
+ ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+ │   │ALL│SAV│   │   │GIT│   │   │   │   │LIO│   │   │
+ ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+ │SFT│   │MTb│ + │LOK│PST│   │BWU│ ~ │   │   │DEL│ = │
+ ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
+ │ \ │CAP│LUN│   │  Mac  │LGO│ ENTER │   │   │ | │   │
+ └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
+```
+
+| QWERTY key | Function | Description |
+|------------|----------|-------------|
+|ESC|LOCK_SCREEN|Lock computer|
+|1|LOGO_CELUS|Set Celus logo on display|
+|2|TYPE_EMAIL_WORK|Type work email|
+|3|TYPE_EMAIL_GMAIL|Type gmail email|
+|4|TYPE_EMAIL_DEUTSCH|Type gmx email|
+|5|SCREENSHOT|Cmd + Shift + 5|
+|7|KC_SLSH|`/`|
+|9|KC_LBRC|`[`|
+|0|KC_RBRC|`]`|
+|MUTE|KC_F12|F12|
+|TAB|KC_MCTL|Mac Mission Control|
+|Q|VIM_WQ_TYPE|Type `:wq`|
+|R|LOGO_RIO|Set Rio logo on display|
+|O|KC_LCBR|`{`|
+|P|KC_RCBR|`}`|
+|Backspace|KC_DEL|DEL key|
+|A|CMD_ALL|Select all + copy|
+|S|CMD_SAVE|Save file (Cmd + S)|
+|G|GIT_TYPE|Type `git commit --amend`|
+|L|LOGO_LION|Set Lion logo on display|
+|Shift|KC_LSFT|Shift|
+|Z|CMD_TAB|Cmd + Tab, go to previous app|
+|X|KC_KP_PLUS|Keypad `+`|
+|C|LOCK_SCREEN|Lock computer|
+|V|CMD_V|Paste clipboard|
+|B|BITWARDEN_UNLOCK|Bitwarden unlock shortcut|
+|N|KC_TILDE|`~`|
+|↑|KC_DEL|DEL key|
+|-|KC_EQL|`=`|
+|/|KC_BSLS|`\`|
+|Mac|KC_CAPS|Caps Lock|
+|OPT|LOGO_LUNCH|Set Lunch logo on display|
+|CTRL|KC_LGUI|Left Command|
+|SPACE (left)|LOGO_SWITCH|Cycle to the next OLED logo|
+|SPACE (right)|KC_ENT|Enter|
+|↓|KC_PIPE|`\|`|
+
+Unassigned on LOWER (`KC_NO`): `6`, `8`, `W`, `E`, `T`, `Y`, `U`, `I`, `;`, `D`, `F`, `H`, `J`, `K`, `,`, `.`, `'`, `M`, `` ` ``, `L1`, `L2`, `←`, `→`.
+
+#### RAISE Layer
+
+```
+ ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
+ │LOK│SAF│CMT│BRV│FRX│EDG│   │   │   │PWD│K9S│SPO│BOO│
+ ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+ │AAI│   │   │EXS│   │KXT│   │   │   │IGS│   │POD│DEL│
+ ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+ │   │AWS│SVC│DPL│STS│GCL│   │   │CRJ│KCT│LOK│   │   │
+ ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+ │SFT│   │   │   │CTX│MDL│   │BWU│ NS│SPO│   │DEL│ = │
+ ├───┼───┼───┼───┼───┴───┼───┼───┴───┼───┼───┼───┼───┤
+ │   │   │OPT│   │  Mac  │LGO│ ENTER │   │PRV│PLY│NXT│
+ └───┴───┴───┴───┴───────┴───┴───────┴───┴───┴───┴───┘
+```
+
+| QWERTY key | Function | Description |
+|------------|----------|-------------|
+|ESC|LOCK_SCREEN|Lock computer|
+|1|SAFARI_OPEN|Open Safari browser|
+|2|COMET_OPEN|Open Comet browser|
+|3|BRAVE_OPEN|Open Brave browser|
+|4|FIREFOX_OPEN|Open Firefox browser|
+|5|EDGE_OPEN|Open Edge browser|
+|8|PASSW_GEN_TYPE|Generate a 23-character password|
+|9|K9S_OPEN|Type `k9s` + Enter|
+|0|SPOTIFY_OPEN|Open Spotify|
+|MUTE|QK_BOOT|Reboot into bootloader (firmware flash)|
+|TAB|APPLE_AI|Apple Intelligence|
+|E|K9S_EXTERNALSECRET_TYPE|Type `:externalsecrets`|
+|T|K8SCNTX_TYPE|Type `kubectl config use-context site-`|
+|I|K9S_INGRESS_TYPE|Type `:ingressroute`|
+|P|K9S_PODS_TYPE|Type `:pods`|
+|Backspace|KC_DEL|DEL key|
+|A|AWS_SSO|Type `aws sso login` + Enter|
+|S|K9S_SVC_TYPE|Type `:services`|
+|D|K9S_DEPLOY_TYPE|Type `:deployments`|
+|F|K9S_STATEFULSET_TYPE|Type `:statefulsets`|
+|G|GIT_CLONE_TYPE|Special paste: `git clone https://$gusr:$tok@$gitsite/<CLIPBOARD>.git`|
+|J|K9S_CRONJOB_TYPE|Type `:cronjobs`|
+|K|KUBECTL_TYPE|Type `kubectl `|
+|L|LOCK_SCREEN|Lock computer|
+|Shift|KC_LSFT|Shift|
+|C|K9S_CTX_TYPE|Type `:ctx`|
+|V|CMD_V_URL|Special paste in markdown link format `[link here](<CLIPBOARD>)`|
+|B|BITWARDEN_UNLOCK|Bitwarden unlock shortcut|
+|N|K9S_NS_TYPE|Type `:ns`|
+|M|SPOTIFY_OPEN|Open Spotify|
+|↑|KC_DEL|DEL key|
+|-|KC_EQL|`=`|
+|OPT|KC_LOPT|Left Option|
+|CTRL|KC_LGUI|Left Command|
+|SPACE (left)|LOGO_SWITCH|Cycle to the next OLED logo|
+|SPACE (right)|KC_ENT|Enter|
+|←|KC_MPRV|Previous track|
+|↓|KC_MPLY|Play / pause|
+|→|KC_MNXT|Next track|
+
+Unassigned on RAISE (`KC_NO`): `6`, `7`, `Q`, `W`, `R`, `Y`, `U`, `O`, `;`, `H`, `,`, `.`, `'`, `Z`, `X`, `` ` ``, `/`, `Mac`, `L1`, `L2`.
+
+#### ADJUST Layer
+
+Currently entirely `KC_NO` — there is no key combination that activates it either (only `MO(1)` and `MO(2)` are bound).
 
 ### Custom Macro Reference
 
 The default keymap wires a set of custom keycodes inside `process_record_user()` so you can launch tools, paste text snippets, or pick OLED logos without leaving the home row. The tables below summarize every macro case that currently exists.
 
 #### Logo Selection
-| Keycode | Action |
-|---------|--------|
-|LOGO_SWITCH|Cycle through the 10 stored OLED logos in sequence|
-|LOGO_TOMORROWLAND|Force the Tomorrowland logo|
-|LOGO_LION|Force the Lion logo|
-|LOGO_BAYERN|Force the Bayern logo|
-|LOGO_FLAMENGO|Force the Flamengo logo|
-|LOGO_CELUS|Force the Celus logo|
-|LOGO_RIO|Force the Rio skyline logo|
-|LOGO_LUNCH|Force the Lunch reminder logo|
-|LOGO_THEOFFICE|Force The Office logo|
-|LOGO_DJ|Force the DJ logo|
+| Keycode | Index | Action |
+|---------|-------|--------|
+|LOGO_SWITCH|—|Cycle through the 10 stored OLED logos in sequence|
+|LOGO_CELUS|4|Force the Celus logo|
+|LOGO_RIO|5|Force the Rio skyline logo|
+|LOGO_LION|1|Force the Lion logo|
+|LOGO_LUNCH|6|Force the Lunch reminder logo|
+|LOGO_TOMORROWLAND|0|Force the Tomorrowland logo *(no key bound)*|
+|LOGO_BAYERN|2|Force the Bayern logo *(no key bound)*|
+|LOGO_FLAMENGO|3|Force the Flamengo logo *(no key bound)*|
+|LOGO_THEOFFICE|7|Force The Office logo *(no key bound)*|
+|LOGO_DJ|8|Force the DJ logo *(no key bound)*|
+
+Index 9 is the password-generator logo, set automatically by `PASSW_GEN_TYPE`.
 
 #### Application Launchers (Spotlight driven)
 | Keycode | Action |
@@ -228,33 +305,31 @@ The default keymap wires a set of custom keycodes inside `process_record_user()`
 |FIREFOX_OPEN|Open Firefox|
 |EDGE_OPEN|Open Microsoft Edge|
 |K9S_OPEN|Type `k9s` and press Enter|
-|ZOOM_OPEN|Open Zoom|
-|CODE_OPEN|Open VS Code ("Code")|
-|TXTEDIT_OPEN|Open TextEdit|
-|WIREVPN_OPEN|Open WireGuard VPN|
-|MATTERMOST_OPEN|Open Mattermost|
 |SPOTIFY_OPEN|Open Spotify|
-|TERMINAL_OPEN|Open the macOS Terminal app|
-|MONITOR_OPEN|Open Monit|
-|CALCULATOR_OPEN|Open Calculator|
+|ZOOM_OPEN|Open Zoom *(no key bound)*|
+|CODE_OPEN|Open VS Code ("Code") *(no key bound)*|
+|TXTEDIT_OPEN|Open TextEdit *(no key bound)*|
+|WIREVPN_OPEN|Open WireGuard VPN *(no key bound)*|
+|MATTERMOST_OPEN|Open Mattermost *(no key bound)*|
+|TERMINAL_OPEN|Open the macOS Terminal app *(no key bound)*|
+|MONITOR_OPEN|Open Monit *(no key bound)*|
+|CALCULATOR_OPEN|Open Calculator *(no key bound)*|
 
 #### Text, System, and Workflow Macros
 | Keycode | Action |
 |---------|--------|
-|PASSW_GEN_TYPE|Generate a random 23-character password and switch the OLED to the password logo|
+|PASSW_GEN_TYPE|Generate a random 23-character password, copy it to the clipboard, type it, and switch the OLED to the password logo|
 |AWS_SSO|Type `aws sso login` and press Enter|
-|VIM_TYPE|Type `vim ` (with trailing space)|
 |VIM_WQ_TYPE|Type `:wq`|
 |KUBECTL_TYPE|Type `kubectl `|
 |K8SCNTX_TYPE|Type `kubectl config use-context site-`|
-|K9S_CTX_TYPE|Type `:ctx` inside k9s|
-|K9S_NS_TYPE|Type `:ns` inside k9s|
-|TERRAFORM_TYPE|Type `terraform plan `|
 |GIT_TYPE|Type `git commit --amend`|
-|GIT_CLONE_TYPE|Type `git clone https://$gusr:$tok@git.celus.co `|
+|GIT_CLONE_TYPE|Type `git clone https://$gusr:$tok@$gitsite/`, paste the clipboard, then append `.git`|
 |CMD_TAB|Hold Command, tap Tab, release (fast app switch)|
-|CMD_Q|Send Command+Q (close app)|
 |CMD_SAVE|Send Command+S|
+|CMD_V|Send Command+V (paste)|
+|CMD_ALL|Send Command+A then Command+C (select all + copy)|
+|CMD_V_URL|Type `[link here](`, paste the clipboard, then `)` — markdown link|
 |SCREENSHOT|Send Command+Shift+5|
 |LOCK_SCREEN|Send Control+Command+Q|
 |APPLE_AI|Double-tap Command to open Apple Intelligence|
@@ -262,6 +337,22 @@ The default keymap wires a set of custom keycodes inside `process_record_user()`
 |TYPE_EMAIL_WORK|Type `<redacted>`|
 |TYPE_EMAIL_GMAIL|Type `<redacted>`|
 |TYPE_EMAIL_DEUTSCH|Type `<redacted>`|
+|VIM_TYPE|Type `vim ` (with trailing space) *(no key bound)*|
+|TERRAFORM_TYPE|Type `terraform plan ` *(no key bound)*|
+|CMD_Q|Send Command+Q (close app) *(no key bound)*|
+
+#### k9s Command Macros
+| Keycode | Action |
+|---------|--------|
+|K9S_CTX_TYPE|Type `:ctx` + Enter|
+|K9S_NS_TYPE|Type `:ns` + Enter|
+|K9S_PODS_TYPE|Type `:pods` + Enter|
+|K9S_DEPLOY_TYPE|Type `:deployments` + Enter|
+|K9S_SVC_TYPE|Type `:services` + Enter|
+|K9S_STATEFULSET_TYPE|Type `:statefulsets` + Enter|
+|K9S_CRONJOB_TYPE|Type `:cronjobs` + Enter|
+|K9S_INGRESS_TYPE|Type `:ingressroute` + Enter|
+|K9S_EXTERNALSECRET_TYPE|Type `:externalsecrets` + Enter|
 
 ### Adding a Custom OLED Logo / Bitmap
 
